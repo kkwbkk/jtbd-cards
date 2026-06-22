@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日方法论小课堂 #002 · 5分钟版 · JTBD 4 步流程</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 16px;
+            background: linear-gradient(180deg, #fef9f3 0%, #ffffff 100%);
+            color: #1f2937;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        .memory-hook-top {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
+            color: white;
+            padding: 16px 20px;
+            border-radius: 14px;
+            margin-bottom: 12px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+            border: 3px solid #fbbf24;
+        }
+        .memory-hook-top .pudding {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .memory-hook-top .big {
+            font-size: 22px;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 2px;
+            letter-spacing: 1px;
+        }
+        .memory-hook-top .sub {
+            font-size: 12px;
+            opacity: 0.95;
+        }
+        .header {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.25);
+            padding: 3px 10px;
+            border-radius: 16px;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+        .header h1 { font-size: 20px; margin-bottom: 4px; }
+        .header h2 { font-size: 13px; font-weight: 400; opacity: 0.95; }
+        .section {
+            background: white;
+            padding: 16px 18px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+            border: 1px solid #fef3c7;
+        }
+        .section-title {
+            color: #b45309;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .section-title .time {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        .essence {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-left: 3px solid #f59e0b;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #78350f;
+        }
+        .key-point {
+            background: #f9fafb;
+            border-left: 3px solid #6b7280;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+        .key-point strong { color: #1f2937; }
+        .step-line {
+            display: flex;
+            gap: 8px;
+            margin: 6px 0;
+            align-items: flex-start;
+            font-size: 13px;
+        }
+        .step-num {
+            flex-shrink: 0;
+            background: #f59e0b;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 1px;
+        }
+        .step-content {
+            flex: 1;
+        }
+        .step-content strong { color: #b45309; }
+        .step-detail {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+        .quiz {
+            background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+            color: white;
+            padding: 18px 20px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
+        }
+        .quiz h2 {
+            color: white;
+            font-size: 15px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .quiz h2 .time {
+            background: rgba(255,255,255,0.25);
+            color: white;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        .quiz ol { padding-left: 20px; }
+        .quiz ol > li {
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+        .quiz ul { padding-left: 18px; margin-top: 4px; }
+        .quiz ul li { font-size: 12px; opacity: 0.95; margin-bottom: 2px; }
+        .highlight-box {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-size: 12px;
+        }
+        .resource {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            margin: 4px 0;
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #92400e;
+            font-size: 13px;
+        }
+        .resource-icon { font-size: 18px; margin-right: 10px; flex-shrink: 0; }
+        .resource-meta { font-size: 11px; color: #78350f; margin-top: 2px; }
+        .resource-badge {
+            display: inline-block;
+            background: #22c55e;
+            color: white;
+            font-size: 10px;
+            padding: 1px 6px;
+            border-radius: 8px;
+            margin-left: 6px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px;
+            color: #9ca3af;
+            font-size: 11px;
+        }
+        .footer .day-info {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .ratio-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            color: white;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 🍮 焦糖布丁记忆点（Day02 延续 Day01 主题）-->
+<div class="memory-hook-top">
+    <span class="pudding">🍮</span>
+    <span class="big">Day02 · JTBD 4 步核心流程</span>
+    <span class="sub">继续焦糖布丁 · 学深学透一个方法论再扩展</span>
+</div>
+
+<div class="header">
+    <span class="badge">📚 每日方法论小课堂 #002 · 5分钟版</span>
+    <h1>JTBD · 4 步核心流程</h1>
+    <h2>第 2 天（共 7 天打透 JTBD）</h2>
+</div>
+
+<!-- ==================== 1 分钟·核心定义 ==================== -->
+<div class="section">
+    <div class="section-title">🎯 1 分钟｜4 步核心流程 <span class="time">1min</span></div>
+
+    <div class="essence">
+        JTBD 4 步 = 识别 Job → 切片情境 → 找痛点 → 设计方案
+    </div>
+
+    <div class="step-line">
+        <div class="step-num">1</div>
+        <div class="step-content">
+            <strong>识别 Job</strong>：用户要完成的底层任务是什么？
+            <div class="step-detail">❌ 不问"你想要什么产品" ✅ 问"你今天要完成什么任务"</div>
+        </div>
+    </div>
+
+    <div class="step-line">
+        <div class="step-num">2</div>
+        <div class="step-content">
+            <strong>切片情境</strong>：Job 发生在什么时间/地点/心情下？
+            <div class="step-detail">不同时段不同 Job（如奶昔早/午/晚 = 3 个不同 Job）</div>
+        </div>
+    </div>
+
+    <div class="step-line">
+        <div class="step-num">3</div>
+        <div class="step-content">
+            <strong>找痛点</strong>：现有方案在每个 Job 上有什么不满？
+            <div class="step-detail">用户"雇用"了别的东西/凑合/不买 = 痛点信号</div>
+        </div>
+    </div>
+
+    <div class="step-line">
+        <div class="step-num">4</div>
+        <div class="step-content">
+            <strong>设计方案</strong>：如何让产品更好地完成这个 Job？
+            <div class="step-detail">不是"让产品更好"，而是"让产品更好地完成 Job"</div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== 2 分钟·经典案例 ==================== -->
+<div class="section">
+    <div class="section-title">📖 2 分钟｜经典案例：麦当劳奶昔 4 步拆解 <span class="time">2min</span></div>
+
+    <div class="key-point" style="border-left-color:#3b82f6;">
+        <strong>Step 1 识别 Job</strong>：奶昔 = "要完成什么任务的产品"？<br>
+        → 答：<strong>不是"好喝的奶昔"</strong>，是"<strong>用户某时某刻要雇用的工具</strong>"
+    </div>
+
+    <div class="key-point" style="border-left-color:#a855f7;">
+        <strong>Step 2 切片情境</strong>：何时/何地/何心情？<br>
+        → 发现 <strong>40% 奶昔在早 8 点前</strong>售出，下午几乎不动 → 时段切片
+    </div>
+
+    <div class="key-point" style="border-left-color:#22c55e;">
+        <strong>Step 3 找痛点</strong>：每个时段的现有方案有什么不满？<br>
+        → 早晨：饥饿+无聊+手忙 → 现有方案都不行<br>
+        → 下午：妈妈需要哄娃又不给糖 → 现有方案都不行
+    </div>
+
+    <div class="key-point" style="border-left-color:#f59e0b;">
+        <strong>Step 4 设计方案</strong>：让奶昔更好地完成每个 Job<br>
+        → 早间加稠+细吸管+单手喝（扛饿+便携）<br>
+        → 下午小杯+果味甜（哄娃+不甜腻）<br>
+        → 晚上经典款（解馋+罪感低）<br>
+        → <strong>结果：单店销量翻倍 ✅</strong>
+    </div>
+</div>
+
+<!-- ==================== 1 分钟·核心应用 ==================== -->
+<div class="section">
+    <div class="section-title">🛠️ 1 分钟｜核心应用 <span class="time">1min</span></div>
+
+    <div class="key-point">
+        <strong>任何产品创新</strong>都先跑这 4 步：
+    </div>
+    <div class="key-point">✅ <strong>Step 1</strong>：抛开产品功能，问"用户的 Job 是什么"</div>
+    <div class="key-point">✅ <strong>Step 2</strong>：按情境切片（早/午/晚 / 工作/家庭 / 新客/老客）</div>
+    <div class="key-point">✅ <strong>Step 3</strong>：找痛点 = 现有方案的缺陷（用户凑合/离职/不买的根因）</div>
+    <div class="key-point">✅ <strong>Step 4</strong>：方案 = 产品 + 服务 + 体验的组合（不只改产品）</div>
+</div>
+
+<!-- ==================== 1 分钟·1 道思考题 ==================== -->
+<div class="quiz">
+    <h2>📝 1 道思考题 <span class="time">1min</span> <span class="ratio-tag">100% 经典案例</span></h2>
+
+    <div class="highlight-box">
+        <strong>经典案例题</strong>：用 JTBD <strong>4 步流程</strong> 拆解 "<strong>瑞幸 vs 蜜雪冰城</strong>"：它们雇用的 Job 有什么不同？
+    </div>
+
+    <p style="font-size:13px; margin:6px 0;">
+        <strong>答题要求</strong>（按 4 步流程拆解）：
+    </p>
+    <ol>
+        <li><strong>Step 1 识别 Job</strong>：瑞幸/蜜雪冰城被雇用的核心 Job 各是什么（不只是"喝咖啡/喝奶茶"）？</li>
+        <li><strong>Step 2 切片情境</strong>：两个品牌各自对应什么时间/地点/心情的 Job？</li>
+        <li><strong>Step 3 找痛点</strong>：对方品牌在对方的核心 Job 上有什么满足不了？</li>
+        <li><strong>Step 4 设计方案</strong>：如果只能各改 1 个动作来更好地完成对方核心 Job，你改什么？</li>
+    </ol>
+
+    <ul>
+        <li>❌ 不要停留在"口感/价格/店面装修"等表面特征</li>
+        <li>✅ 必须用 4 步框架的术语（J / 情境 / 痛点 / 方案）</li>
+        <li>✅ 提示：参考奶昔"按时间切片"思路，瑞幸和蜜雪冰城可能在不同时段雇用了不同 Job</li>
+    </ul>
+
+    <div class="highlight-box" style="margin-top:8px;">
+        ⏰ <strong>5 分钟全过程</strong>：学 1min + 反馈 1min + 答题 1min + 思考 2min<br>
+        📊 <strong>考察能力</strong>：JTBD 4 步流程显式调用 + 按情境切片 + 区分功能 vs Job<br>
+        🔗 <strong>下一节</strong>：Day03 · 3 个核心工具（Job Map / Job Statement / Forces）
+    </div>
+</div>
+
+<!-- ==================== 反馈资源（4 个）==================== -->
+<div class="section">
+    <div class="section-title">📚 反馈资源（4 个 · 按你的时间选看 1-2 个）<span class="time">1min</span></div>
+
+    <div class="highlight-box" style="background:#fef3c7; border-left:3px solid #f59e0b; color:#78350f; padding:6px 10px; margin:6px 0; border-radius:4px; font-size:11px;">
+        💡 <strong>选看建议</strong>：Day01 视频看过的可以跳过；新加的"5 个深访技巧"是 Day04 预告，可以现在看也可以等。
+    </div>
+
+    <a href="https://www.bilibili.com/video/BV1uXsVeGE3A/" target="_blank" class="resource">
+        <span class="resource-icon">🎬</span>
+        <div style="flex:1;">
+            <strong>① 焦糖布丁访谈的5个技巧——5 Tips for Conducting JTBD Interviews</strong> <span class="resource-badge">8:38</span>
+            <div class="resource-meta">竟然爱上草莓了 · 2024-08-29 · Bob Moesta 真实深访技巧 · <strong>Day04 预告</strong></div>
+        </div>
+    </a>
+
+    <a href="https://www.bilibili.com/video/BV1X2P7euE3Q/" target="_blank" class="resource">
+        <span class="resource-icon">🎬</span>
+        <div style="flex:1;">
+            <strong>② JTBD理论全解析-带你探究需求的本质</strong> <span class="resource-badge">5:08</span>
+            <div class="resource-meta">侯哥说产品 · 2025-02-27 · 4 步流程详解</div>
+        </div>
+    </a>
+
+    <a href="https://www.bilibili.com/video/BV1kbPrzEEv3/" target="_blank" class="resource">
+        <span class="resource-icon">🎬</span>
+        <div style="flex:1;">
+            <strong>③ （中字）Jobs To Be Done | How to use JTBD in product design</strong> <span class="resource-badge">10:03</span>
+            <div class="resource-meta">探潮实验室 · 2026-03-05 · 中文字幕 · 4 步应用</div>
+        </div>
+    </a>
+
+    <a href="https://weread.qq.com/web/reader/c8532ab071543c07c85a3f2" target="_blank" class="resource">
+        <span class="resource-icon">📘</span>
+        <div style="flex:1;">
+            <strong>④ Christensen《与运气竞争》第 4-5 章</strong> <span class="resource-badge">核心 4 步</span>
+            <div class="resource-meta">微信读书 · 4 步流程的源头</div>
+        </div>
+    </a>
+</div>
+
+<!-- ==================== 底部 ==================== -->
+<div class="footer">
+    <div class="day-info">📍 Week 1 · Day 2 · JTBD 4 步流程 · 5分钟版</div>
+    <p style="margin-top:4px;">
+        <strong>5 分钟路径</strong>：① 读 4 步定义 1min → ② 看奶昔 4 步拆解 2min → ③ 看核心应用 1min → ④ 答题 1min
+    </p>
+    <p style="margin-top:4px; font-size:10px; color:#d1d5db;">
+        出题：2026-06-22 Day02 · 4 个资源全部实测可访问 · 题目来源：100% 经典案例
+    </p>
+</div>
+
+</body>
+</html>
