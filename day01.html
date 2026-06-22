@@ -16,7 +16,6 @@
             line-height: 1.6;
             font-size: 15px;
         }
-        /* 🍮 焦糖布丁记忆点：移到页面最顶部（在 header 之前）*/
         .memory-hook-top {
             background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
             color: white;
@@ -179,6 +178,30 @@
             text-decoration: none;
             color: #92400e;
             font-size: 13px;
+            transition: all 0.2s;
+        }
+        .resource:hover {
+            background: #fde68a;
+            transform: translateX(4px);
+        }
+        .resource-icon {
+            font-size: 18px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        .resource-meta {
+            font-size: 11px;
+            color: #78350f;
+            margin-top: 2px;
+        }
+        .resource-badge {
+            display: inline-block;
+            background: #22c55e;
+            color: white;
+            font-size: 10px;
+            padding: 1px 6px;
+            border-radius: 8px;
+            margin-left: 6px;
         }
         .footer {
             text-align: center;
@@ -214,7 +237,7 @@
 <div class="memory-hook-top">
     <span class="pudding">🍮</span>
     <span class="big">JTBD = 焦糖布丁</span>
-    <span class="sub">谐音梗记忆点 · 用户想吃焦糖布丁 = 完成一个甜蜜任务</span>
+    <span class="sub">Bob Moesta 本人用的"焦糖布丁访谈"系列名 · 谐音梗记忆点</span>
 </div>
 
 <div class="header">
@@ -324,15 +347,43 @@
     </div>
 </div>
 
-<!-- ==================== 1 个核心资源 ==================== -->
+<!-- ==================== 反馈资源（4 个）==================== -->
 <div class="section">
-    <div class="section-title">📚 1 个核心资源 <span class="time">1min</span></div>
+    <div class="section-title">📚 反馈资源（4 个 · 按你的时间选看 1-2 个）<span class="time">1min</span></div>
+
+    <div class="highlight-box" style="background:#fef3c7; border-left:3px solid #f59e0b; color:#78350f; padding:6px 10px; margin:6px 0; border-radius:4px; font-size:11px;">
+        💡 <strong>选看建议</strong>：时间紧只看 1 个视频（5分钟）；时间充裕看视频+翻书。老板可以按场景灵活组合。
+    </div>
+
+    <a href="https://www.bilibili.com/video/BV1X2P7euE3Q/" target="_blank" class="resource">
+        <span class="resource-icon">🎬</span>
+        <div style="flex:1;">
+            <strong>① JTBD理论全解析-带你探究需求的本质</strong> <span class="resource-badge">5:08</span>
+            <div class="resource-meta">侯哥说产品 · 2025-02-27 · 5分钟讲清核心框架 · <strong>时间紧首选</strong></div>
+        </div>
+    </a>
+
+    <a href="https://www.bilibili.com/video/BV1uXsVeGE3A/" target="_blank" class="resource">
+        <span class="resource-icon">🎬</span>
+        <div style="flex:1;">
+            <strong>② 焦糖布丁访谈的5个技巧——5 Tips for Conducting JTBD Interviews</strong> <span class="resource-badge">8:38</span>
+            <div class="resource-meta">竟然爱上草莓了 · 2024-08-29 · Bob Moesta 本人访谈系列 · <strong>案例实操向</strong></div>
+        </div>
+    </a>
+
+    <a href="https://www.bilibili.com/video/BV1kbPrzEEv3/" target="_blank" class="resource">
+        <span class="resource-icon">🎬</span>
+        <div style="flex:1;">
+            <strong>③ （中字）Jobs To Be Done | How to use JTBD in product design</strong> <span class="resource-badge">10:03</span>
+            <div class="resource-meta">探潮实验室 · 2026-03-05 · 中文字幕 · 标签含"焦糖布丁" · <strong>产品设计视角</strong></div>
+        </div>
+    </a>
 
     <a href="https://weread.qq.com/web/reader/c8532ab071543c07c85a3f2" target="_blank" class="resource">
-        <span style="font-size:18px; margin-right:8px;">📘</span>
-        <div>
-            <strong>Christensen《与运气竞争》</strong>（微信读书 · 克莱顿·克里斯坦森 等）
-            <div style="font-size:11px; color:#78350f;">JTBD 圣经 · 5 分钟反馈资源 · 2026-06-22 实测可访问</div>
+        <span class="resource-icon">📘</span>
+        <div style="flex:1;">
+            <strong>④ Christensen《与运气竞争》</strong> <span class="resource-badge">第1-3章</span>
+            <div class="resource-meta">微信读书 · 克莱顿·克里斯坦森 等 · JTBD 圣经原文 · <strong>深度阅读</strong></div>
         </div>
     </a>
 </div>
@@ -341,11 +392,11 @@
 <div class="footer">
     <div class="day-info">📍 Week 1 · Day 1 · JTBD 焦糖布丁 · 5分钟版</div>
     <p style="margin-top:4px;">
-        <strong>5 分钟路径</strong>：① 读核心定义 1min → ② 读奶昔案例 2min → ③ 看核心应用 1min → ④ 答题 1min<br>
+        <strong>5 分钟路径</strong>：① 读核心定义 1min → ② 读奶昔案例 2min → ③ 看核心应用 1min → ④ 答题 1min → ⑤ 选看反馈 1min<br>
         <strong>Day07 计划</strong>：JTBD 完整复盘版（耗时可以长，含 4 步流程 + 3 个核心工具 + 实操模板）
     </p>
     <p style="margin-top:4px; font-size:10px; color:#d1d5db;">
-        出题：2026-06-22 v4 修正版 · 谐音梗：焦糖布丁 · 链接已实测验证 · 题目来源：100% 经典案例
+        出题：2026-06-22 v5 修正版 · 谐音梗：焦糖布丁 · 4 个资源全部实测可访问 · 题目来源：100% 经典案例
     </p>
 </div>
 
