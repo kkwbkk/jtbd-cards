@@ -16,42 +16,12 @@
             line-height: 1.6;
             font-size: 15px;
         }
-        /* 🍮 焦糖布丁记忆点：移到页面最顶部（在 header 之前）*/
-        .memory-hook-top {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
-            color: white;
-            padding: 20px 24px;
-            border-radius: 14px;
-            margin-bottom: 12px;
-            text-align: center;
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
-            border: 3px solid #fbbf24;
-        }
-        .memory-hook-top .pudding {
-            font-size: 48px;
-            display: block;
-            margin-bottom: 4px;
-            line-height: 1;
-        }
-        .memory-hook-top .big {
-            font-size: 26px;
-            font-weight: 800;
-            display: block;
-            margin-bottom: 4px;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .memory-hook-top .sub {
-            font-size: 13px;
-            opacity: 0.95;
-            font-weight: 500;
-        }
         .header {
             background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             color: white;
-            padding: 16px 20px;
-            border-radius: 10px;
-            margin-bottom: 12px;
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin-bottom: 16px;
             box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
         }
         .header .badge {
@@ -60,15 +30,37 @@
             padding: 3px 10px;
             border-radius: 16px;
             font-size: 12px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
-        .header h1 { font-size: 20px; margin-bottom: 4px; }
-        .header h2 { font-size: 13px; font-weight: 400; opacity: 0.95; }
+        .header h1 { font-size: 22px; margin-bottom: 4px; }
+        .header h2 { font-size: 14px; font-weight: 400; opacity: 0.95; }
+        .memory-hook {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .memory-hook .big {
+            font-size: 20px;
+            font-weight: 800;
+            color: #92400e;
+            display: block;
+            margin-bottom: 2px;
+            letter-spacing: 1px;
+        }
+        .memory-hook .sub {
+            font-size: 12px;
+            color: #78350f;
+            opacity: 0.85;
+        }
         .section {
             background: white;
-            padding: 16px 18px;
+            padding: 18px 20px;
             border-radius: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             box-shadow: 0 1px 6px rgba(0,0,0,0.04);
             border: 1px solid #fef3c7;
         }
@@ -76,7 +68,7 @@
             color: #b45309;
             font-size: 14px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -132,15 +124,15 @@
         .quiz {
             background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
             color: white;
-            padding: 18px 20px;
+            padding: 20px;
             border-radius: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
         }
         .quiz h2 {
             color: white;
-            font-size: 15px;
-            margin-bottom: 8px;
+            font-size: 16px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -156,8 +148,8 @@
         }
         .quiz ol { padding-left: 20px; }
         .quiz ol > li {
-            margin-bottom: 6px;
-            font-size: 13px;
+            margin-bottom: 8px;
+            font-size: 14px;
         }
         .quiz ul { padding-left: 18px; margin-top: 4px; }
         .quiz ul li { font-size: 12px; opacity: 0.95; margin-bottom: 2px; }
@@ -171,7 +163,7 @@
         .resource {
             display: flex;
             align-items: center;
-            padding: 10px 12px;
+            padding: 8px 12px;
             margin: 4px 0;
             background: #fffbeb;
             border: 1px solid #fde68a;
@@ -182,8 +174,8 @@
         }
         .footer {
             text-align: center;
-            margin-top: 10px;
-            padding: 10px;
+            margin-top: 12px;
+            padding: 12px;
             color: #9ca3af;
             font-size: 11px;
         }
@@ -210,17 +202,15 @@
 </head>
 <body>
 
-<!-- 🍮 焦糖布丁记忆点：页面最顶部（图标题之前）-->
-<div class="memory-hook-top">
-    <span class="pudding">🍮</span>
-    <span class="big">JTBD = 焦糖布丁</span>
-    <span class="sub">谐音梗记忆点 · 用户想吃焦糖布丁 = 完成一个甜蜜任务</span>
-</div>
-
 <div class="header">
     <span class="badge">📚 每日方法论小课堂 #001 · 5分钟版</span>
-    <h1>JTBD · 用户洞察的底层框架</h1>
-    <h2>第 1 天（共 7 天打透）</h2>
+    <h1>🍮 JTBD · 焦糖布丁</h1>
+    <h2>用户洞察的底层框架 · 第 1 天（共 7 天打透）</h2>
+</div>
+
+<div class="memory-hook">
+    <span class="big">🍮 JTBD = 焦糖布丁</span>
+    <span class="sub">谐音梗记忆点 · 用户想吃焦糖布丁 = 完成一个甜蜜任务</span>
 </div>
 
 <!-- ==================== 1 分钟·核心定义 ==================== -->
@@ -302,7 +292,7 @@
         <strong>经典案例题</strong>：用 JTBD 分析"<strong>早晨咖啡 vs 下午咖啡</strong>"，用户要完成的 Job 有什么不同？
     </div>
 
-    <p style="font-size:13px; margin:6px 0;">
+    <p style="font-size:14px; margin:8px 0;">
         <strong>答题要求</strong>（用 J/T/B/D 四字母框架拆解）：
     </p>
     <ol>
@@ -317,7 +307,7 @@
         <li>✅ 提示：买咖啡的人 ≠ 喝咖啡的人，思考"<strong>谁、何时、为何</strong>"</li>
     </ul>
 
-    <div class="highlight-box" style="margin-top:8px;">
+    <div class="highlight-box" style="margin-top:10px;">
         ⏰ <strong>5 分钟全过程</strong>：学 1min + 反馈 1min + 答题 1min + 思考 2min<br>
         📊 <strong>考察能力</strong>：JTBD 显式调用 + Jobs 按情境切分 + 区分功能 vs 任务<br>
         🔗 <strong>下一节</strong>：Day02 · 4 步流程 + 3 个核心工具
@@ -328,11 +318,11 @@
 <div class="section">
     <div class="section-title">📚 1 个核心资源 <span class="time">1min</span></div>
 
-    <a href="https://weread.qq.com/web/reader/c8532ab071543c07c85a3f2" target="_blank" class="resource">
+    <a href="https://weread.qq.com/web/bookDetail/c4f32c707df9e4ec4f35b87" target="_blank" class="resource">
         <span style="font-size:18px; margin-right:8px;">📘</span>
         <div>
-            <strong>Christensen《与运气竞争》</strong>（微信读书 · 克莱顿·克里斯坦森 等）
-            <div style="font-size:11px; color:#78350f;">JTBD 圣经 · 5 分钟反馈资源 · 2026-06-22 实测可访问</div>
+            <strong>Christensen《与运气竞争》第 1-3 章</strong>（微信读书）
+            <div style="font-size:11px; color:#78350f;">JTBD 圣经 · 5 分钟反馈资源 · 出题前已验证可读</div>
         </div>
     </a>
 </div>
@@ -340,12 +330,12 @@
 <!-- ==================== 底部 ==================== -->
 <div class="footer">
     <div class="day-info">📍 Week 1 · Day 1 · JTBD 焦糖布丁 · 5分钟版</div>
-    <p style="margin-top:4px;">
+    <p style="margin-top:6px;">
         <strong>5 分钟路径</strong>：① 读核心定义 1min → ② 读奶昔案例 2min → ③ 看核心应用 1min → ④ 答题 1min<br>
         <strong>Day07 计划</strong>：JTBD 完整复盘版（耗时可以长，含 4 步流程 + 3 个核心工具 + 实操模板）
     </p>
-    <p style="margin-top:4px; font-size:10px; color:#d1d5db;">
-        出题：2026-06-22 v4 修正版 · 谐音梗：焦糖布丁 · 链接已实测验证 · 题目来源：100% 经典案例
+    <p style="margin-top:6px; font-size:10px; color:#d1d5db;">
+        出题：2026-06-22 v3 5分钟极简版 · 谐音梗：焦糖布丁 · 题目来源：100% 经典案例
     </p>
 </div>
 
