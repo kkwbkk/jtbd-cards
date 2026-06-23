@@ -3,669 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>每日方法论小课堂 #002 · 5分钟版 · JTBD 4 步流程 · v2（带答题框）</title>
+    <title>每日方法论小课堂 #002 · 10分钟版 · JTBD · Day02 · v3（4步核心流程）</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 16px;
-            background: linear-gradient(180deg, #fef9f3 0%, #ffffff 100%);
-            color: #1f2937;
-            line-height: 1.6;
-            font-size: 15px;
+            max-width: 720px; margin: 0 auto; padding: 16px;
+            background: linear-gradient(180deg, #fef9f3 0%, #ffffff 100%); color: #1f2937; line-height: 1.6; font-size: 15px;
         }
-        .memory-hook-top {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
-            color: white;
-            padding: 16px 20px;
-            border-radius: 14px;
-            margin-bottom: 12px;
-            text-align: center;
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
-            border: 3px solid #fbbf24;
+        .hook {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white; padding: 24px 20px; border-radius: 14px; margin-bottom: 12px;
+            text-align: center; box-shadow: 0 6px 20px rgba(30, 41, 59, 0.3); position: relative; overflow: hidden;
         }
-        .memory-hook-top .pudding {
-            font-size: 36px;
-            display: block;
-            margin-bottom: 2px;
+        .hook::before {
+            content: ''; position: absolute; top: -40px; right: -40px; width: 120px; height: 120px;
+            background: rgba(14, 165, 233, 0.15); border-radius: 50%;
         }
-        .memory-hook-top .big {
-            font-size: 22px;
-            font-weight: 800;
-            display: block;
-            margin-bottom: 2px;
-            letter-spacing: 1px;
+        .hook .question {
+            font-size: 20px; font-weight: 800; display: block; line-height: 1.3;
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9, #0284c7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-        .memory-hook-top .sub {
-            font-size: 12px;
-            opacity: 0.95;
+        .hook .promise {
+            font-size: 14px; display: block; margin-top: 8px; opacity: 0.85; line-height: 1.6;
+        }
+        .hook .promise em {
+            font-style: normal; color: #38bdf8; font-weight: 600;
+        }
+        .hook .memory-tag {
+            display: inline-block; margin-top: 10px; padding: 3px 12px; background: rgba(14, 165, 233, 0.2);
+            border: 1px solid rgba(14, 165, 233, 0.3); border-radius: 20px; font-size: 11px; color: #38bdf8;
         }
         .header {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            color: white;
-            padding: 14px 18px;
-            border-radius: 10px;
-            margin-bottom: 12px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white; padding: 16px 20px; border-radius: 10px; margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
         }
-        .header .badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.25);
-            padding: 3px 10px;
-            border-radius: 16px;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
+        .header .badge { display: inline-block; background: rgba(255,255,255,0.25); padding: 3px 10px; border-radius: 16px; font-size: 12px; margin-bottom: 6px; }
         .header h1 { font-size: 20px; margin-bottom: 4px; }
         .header h2 { font-size: 13px; font-weight: 400; opacity: 0.95; }
         .section {
-            background: white;
-            padding: 16px 18px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-            border: 1px solid #fef3c7;
+            background: white; padding: 16px 18px; border-radius: 10px; margin-bottom: 10px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.04); border: 1px solid #e0f2fe;
         }
         .section-title {
-            color: #b45309;
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            color: #0369a1; font-size: 14px; font-weight: 700; margin-bottom: 8px;
+            display: flex; align-items: center; gap: 6px;
         }
-        .section-title .time {
-            background: #fef3c7;
-            color: #92400e;
-            padding: 1px 8px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-left: auto;
-        }
+        .section-title .time { background: #e0f2fe; color: #0369a1; padding: 1px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-left: auto; }
         .essence {
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-            border-left: 3px solid #f59e0b;
-            padding: 10px 14px;
-            border-radius: 6px;
-            margin: 8px 0;
-            font-size: 14px;
-            font-weight: 600;
-            color: #78350f;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-left: 3px solid #0ea5e9;
+            padding: 10px 14px; border-radius: 6px; margin: 8px 0; font-size: 14px; font-weight: 600; color: #0c4a6e;
         }
-        .key-point {
-            background: #f9fafb;
-            border-left: 3px solid #6b7280;
-            padding: 8px 12px;
-            border-radius: 4px;
-            margin: 6px 0;
-            font-size: 13px;
-        }
+        .key-point { background: #f9fafb; border-left: 3px solid #6b7280; padding: 8px 12px; border-radius: 4px; margin: 6px 0; font-size: 13px; }
         .key-point strong { color: #1f2937; }
-        .step-line {
-            display: flex;
-            gap: 8px;
-            margin: 6px 0;
-            align-items: flex-start;
-            font-size: 13px;
+        .case-section {
+            background: #f8fafc; border-radius: 8px; padding: 12px 14px; margin: 10px 0; border: 1px solid #e2e8f0;
         }
-        .step-num {
-            flex-shrink: 0;
-            background: #f59e0b;
-            color: white;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-            margin-top: 1px;
+        .case-section .case-label {
+            display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-bottom: 6px;
         }
-        .step-content {
-            flex: 1;
+        .case-section p { font-size: 13px; margin: 4px 0; line-height: 1.7; }
+        .case-label.bg { background: #fee2e2; color: #991b1b; }
+        .case-label.method { background: #dbeafe; color: #1e40af; }
+        .case-label.result { background: #d1fae5; color: #065f46; }
+        .case-line { display: flex; gap: 6px; margin: 3px 0; font-size: 13px; }
+        .case-line .label { flex-shrink: 0; color: #0369a1; font-weight: 600; width: 70px; }
+        .process-step {
+            background: #f0f9ff; border-left: 3px solid #0ea5e9; padding: 8px 12px; border-radius: 4px; margin: 6px 0; font-size: 13px;
         }
-        .step-content strong { color: #b45309; }
-        .step-detail {
-            font-size: 12px;
-            color: #6b7280;
-            margin-top: 2px;
-        }
+        .process-step .step-num { font-weight: 700; color: #0ea5e9; font-size: 14px; }
+        code { background: #e0f2fe; padding: 1px 5px; border-radius: 3px; font-family: "SF Mono", Menlo, monospace; font-size: 12px; color: #0369a1; }
         .quiz {
-            background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
-            color: white;
-            padding: 18px 20px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white; padding: 18px 20px; border-radius: 10px; margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
         }
-        .quiz h2 {
-            color: white;
-            font-size: 15px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .quiz h2 .time {
-            background: rgba(255,255,255,0.25);
-            color: white;
-            padding: 1px 8px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-left: auto;
-        }
+        .quiz h2 { color: white; font-size: 15px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .quiz h2 .time { background: rgba(255,255,255,0.25); color: white; padding: 1px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-left: auto; }
         .quiz ol { padding-left: 20px; }
-        .quiz ol > li {
-            margin-bottom: 6px;
-            font-size: 13px;
-        }
+        .quiz ol > li { margin-bottom: 6px; font-size: 13px; }
         .quiz ul { padding-left: 18px; margin-top: 4px; }
         .quiz ul li { font-size: 12px; opacity: 0.95; margin-bottom: 2px; }
-        .highlight-box {
-            background: rgba(255,255,255,0.2);
-            padding: 8px 12px;
-            border-radius: 6px;
-            margin: 8px 0;
-            font-size: 12px;
+        .highlight-box { background: rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 12px; }
+        .case-background {
+            background: rgba(0,0,0,0.15); padding: 14px 16px; border-radius: 8px; margin: 10px 0; font-size: 13px; line-height: 1.8;
         }
+        .case-background strong { color: #7dd3fc; }
+        .case-background .emoji-bullet { display: flex; gap: 8px; margin: 6px 0; align-items: flex-start; }
+        .case-background .emoji-bullet span:first-child { flex-shrink: 0; font-size: 14px; }
         .resource {
-            display: flex;
-            align-items: center;
-            padding: 10px 12px;
-            margin: 4px 0;
-            background: #fffbeb;
-            border: 1px solid #fde68a;
-            border-radius: 6px;
-            text-decoration: none;
-            color: #92400e;
-            font-size: 13px;
+            display: flex; align-items: center; padding: 10px 12px; margin: 4px 0;
+            background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px;
+            text-decoration: none; color: #0369a1; font-size: 13px; transition: all 0.2s;
         }
+        .resource:hover { background: #bae6fd; transform: translateX(4px); }
         .resource-icon { font-size: 18px; margin-right: 10px; flex-shrink: 0; }
-        .resource-meta { font-size: 11px; color: #78350f; margin-top: 2px; }
-        .resource-badge {
-            display: inline-block;
-            background: #22c55e;
-            color: white;
-            font-size: 10px;
-            padding: 1px 6px;
-            border-radius: 8px;
-            margin-left: 6px;
+        .resource-meta { font-size: 11px; color: #0c4a6e; margin-top: 2px; }
+        .resource-badge { display: inline-block; background: #22c55e; color: white; font-size: 10px; padding: 1px 6px; border-radius: 8px; margin-left: 6px; }
+        .footer { text-align: center; margin-top: 10px; padding: 10px; color: #9ca3af; font-size: 11px; }
+        .footer .day-info { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 2px 10px; border-radius: 12px; font-weight: 600; margin-bottom: 4px; }
+        .ratio-tag { display: inline-block; background: rgba(255,255,255,0.3); color: white; padding: 1px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-left: 6px; }
+        /* 答题区 */
+        .answer-grid { margin: 12px 0 0 0; }
+        .answer-field {
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.08); border-radius: 8px; padding: 10px; border: 1px solid rgba(255,255,255,0.15);
         }
-        .footer {
-            text-align: center;
-            margin-top: 10px;
-            padding: 10px;
-            color: #9ca3af;
-            font-size: 11px;
+        .answer-field-label {
+            font-size: 13px; font-weight: 600; color: #7dd3fc; margin-bottom: 4px;
+            display: flex; align-items: center; gap: 4px;
         }
-        .footer .day-info {
-            display: inline-block;
-            background: #fef3c7;
-            color: #92400e;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-weight: 600;
-            margin-bottom: 4px;
+        .answer-field-hint {
+            font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 6px; font-weight: 400;
         }
-        .ratio-tag {
-            display: inline-block;
-            background: rgba(255,255,255,0.3);
-            color: white;
-            padding: 1px 8px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-left: 6px;
+        .answer-field textarea {
+            width: 100%; padding: 8px 10px; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px;
+            font-family: -apple-system, sans-serif; font-size: 13px; line-height: 1.5; resize: vertical;
+            min-height: 100px; background: rgba(255,255,255,0.95); color: #1f2937;
         }
-    <style>
-        /* v6 答题区样式 */
-        .answer-box {
-            margin: 12px 0;
-            padding: 12px;
-            background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
-            border-left: 3px solid #3b82f6;
-            border-radius: 6px;
-        }
-        .answer-box-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #1e40af;
-            margin-bottom: 6px;
-        }
-        .answer-box textarea {
-            width: 100%;
-            padding: 8px 10px;
-            border: 1px solid #93c5fd;
-            border-radius: 4px;
-            font-family: -apple-system, sans-serif;
-            font-size: 13px;
-            line-height: 1.5;
-            resize: vertical;
-            min-height: 120px;
-            background: white;
-            color: #1f2937;
-        }
-        .answer-box textarea:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        .answer-field textarea:focus {
+            outline: none; border-color: #38bdf8; box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
         }
         .answer-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-            align-items: center;
-            flex-wrap: wrap;
+            display: flex; gap: 8px; margin-top: 10px; align-items: center; flex-wrap: wrap;
         }
         .btn-primary, .btn-secondary {
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
-            border: none;
-            transition: all 0.15s;
+            padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; transition: all 0.15s;
         }
-        .btn-primary {
-            background: #3b82f6;
-            color: white;
-        }
+        .btn-primary { background: #3b82f6; color: white; }
         .btn-primary:hover { background: #2563eb; }
-        .btn-secondary {
-            background: #e5e7eb;
-            color: #374151;
-        }
-        .btn-secondary:hover { background: #d1d5db; }
-        .status-text {
-            font-size: 11px;
-            margin-left: 4px;
-            font-weight: 500;
-        }
-        .status-success { color: #059669; }
-        .status-warn { color: #d97706; }
-        .status-error { color: #dc2626; }
-        .status-pending { color: #2563eb; }
-        .token-config {
-            margin-top: 10px;
-            font-size: 12px;
-            background: #fffbeb;
-            padding: 6px 10px;
-            border-radius: 4px;
-            border-left: 3px solid #f59e0b;
-        }
-        .token-config summary {
-            cursor: pointer;
-            font-weight: 500;
-            color: #78350f;
-        }
-        .token-config p {
-            margin: 6px 0;
-            color: #78350f;
-            line-height: 1.5;
-        }
-        .token-config input {
-            width: 100%;
-            padding: 6px 8px;
-            margin: 4px 0;
-            font-family: monospace;
-            font-size: 12px;
-            border: 1px solid #d97706;
-            border-radius: 3px;
-            background: white;
-        }
-    </style>
+        .btn-secondary { background: rgba(255,255,255,0.2); color: white; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.35); }
+        .status-text { font-size: 11px; margin-left: 4px; font-weight: 500; }
+        .status-success { color: #86efac; }
+        .status-warn { color: #fde68a; }
+        .status-error { color: #fca5a5; }
+        .status-pending { color: #93c5fd; }
     </style>
 </head>
 <body>
 
-<!-- 🍮 焦糖布丁记忆点（Day02 延续 Day01 主题）-->
-<div class="memory-hook-top">
-    <span class="pudding">🍮</span>
-    <span class="big">Day02 · JTBD 4 步核心流程</span>
-    <span class="sub">继续焦糖布丁 · 学深学透一个方法论再扩展</span>
+<!-- Hook -->
+<div class="hook">
+    <span class="question">用户说"要更快"你就拼命加速？</span>
+    <span class="promise">JTBD 4步核心流程 · 一套让你从「<em>猜</em>用户要什么」<br>切换到「<em>看清</em>用户真正任务」的思维操作系统</span>
+    <span class="memory-tag">🔍 识别→切片→找痛点→设计 · JTBD 四步法</span>
 </div>
 
 <div class="header">
-    <span class="badge">📚 每日方法论小课堂 #002 · 5分钟版</span>
-    <h1>JTBD · 4 步核心流程</h1>
-    <h2>第 2 天（共 7 天打透 JTBD）</h2>
+    <span class="badge">📚 每日方法论小课堂 #002 · 10分钟版 <span style="background:#22c55e;color:white;font-size:11px;padding:1px 6px;border-radius:8px;margin-left:6px;">v3</span></span>
+    <h1>JTBD · 4步核心流程</h1>
+    <h2>第 2 天（共 7 天打透）</h2>
 </div>
 
-<!-- ==================== 1 分钟·核心定义 ==================== -->
+<!-- ==================== 1.5 分钟·核心定义 ==================== -->
 <div class="section">
-    <div class="section-title">🎯 1 分钟｜4 步核心流程 <span class="time">1min</span></div>
+    <div class="section-title">🎯 1.5 分钟｜4步核心流程 <span class="time">1.5min</span></div>
+    <div class="essence">4步流程 = 识别 Job → 切片拆解 → 找痛点 → 设计方案</div>
 
-    <div class="essence">
-        JTBD 4 步 = 识别 Job → 切片情境 → 找痛点 → 设计方案
+    <div class="process-step">
+        <span class="step-num">第1步 · 识别 Job</span><br>
+        问：用户到底在完成什么任务？<br>
+        <span style="color:#6b7280;">❌ 不是"用户想买什么产品" → ✅ "用户在什么情境下需要完成什么任务"</span>
+    </div>
+    <div class="process-step">
+        <span class="step-num">第2步 · 切片拆解</span><br>
+        把 Job 拆成三个维度：<strong>功能需求</strong>（要完成什么）+ <strong>情感需求</strong>（想感受什么）+ <strong>社交需求</strong>（想被怎么看）<br>
+        <span style="color:#6b7280;">例：买净水机 → 功能=喝干净水 · 情感=不再焦虑水质 · 社交=好妈妈/好丈夫</span>
+    </div>
+    <div class="process-step">
+        <span class="step-num">第3步 · 找痛点</span><br>
+        用户在完成 Job 的过程中，哪一步最痛苦？<br>
+        <span style="color:#6b7280;">❌ 不是问"产品哪里不好" → ✅ 问"你上次想完成这个任务时卡在哪一步"</span>
+    </div>
+    <div class="process-step">
+        <span class="step-num">第4步 · 设计方案</span><br>
+        不是"让产品更好"，而是"消除痛苦点"。<br>
+        <span style="color:#6b7280;">核心转变：从"我们能做到什么" → "用户真正需要消除什么痛苦"</span>
     </div>
 
-    <div class="step-line">
-        <div class="step-num">1</div>
-        <div class="step-content">
-            <strong>识别 Job</strong>：用户要完成的底层任务是什么？
-            <div class="step-detail">❌ 不问"你想要什么产品" ✅ 问"你今天要完成什么任务"</div>
-        </div>
-    </div>
-
-    <div class="step-line">
-        <div class="step-num">2</div>
-        <div class="step-content">
-            <strong>切片情境</strong>：Job 发生在什么时间/地点/心情下？
-            <div class="step-detail">不同时段不同 Job（如奶昔早/午/晚 = 3 个不同 Job）</div>
-        </div>
-    </div>
-
-    <div class="step-line">
-        <div class="step-num">3</div>
-        <div class="step-content">
-            <strong>找痛点</strong>：现有方案在每个 Job 上有什么不满？
-            <div class="step-detail">用户"雇用"了别的东西/凑合/不买 = 痛点信号</div>
-        </div>
-    </div>
-
-    <div class="step-line">
-        <div class="step-num">4</div>
-        <div class="step-content">
-            <strong>设计方案</strong>：如何让产品更好地完成这个 Job？
-            <div class="step-detail">不是"让产品更好"，而是"让产品更好地完成 Job"</div>
-        </div>
+    <div class="essence" style="margin-top:10px;">
+        💡 核心洞察：90%的产品迭代在第1步就错了——<strong>没搞清楚 Job 就开始"优化产品"</strong>
     </div>
 </div>
 
-<!-- ==================== 2 分钟·经典案例 ==================== -->
+<!-- ==================== 3 分钟·经典案例：汽车保险（Bob Moesta） ==================== -->
 <div class="section">
-    <div class="section-title">📖 2 分钟｜经典案例：麦当劳奶昔 4 步拆解 <span class="time">2min</span></div>
-
-    <div class="key-point" style="border-left-color:#3b82f6;">
-        <strong>Step 1 识别 Job</strong>：奶昔 = "要完成什么任务的产品"？<br>
-        → 答：<strong>不是"好喝的奶昔"</strong>，是"<strong>用户某时某刻要雇用的工具</strong>"
+    <div class="section-title">📖 3 分钟｜经典案例：车险购买者的"真实任务" <span class="time">3min</span></div>
+    <div class="case-section">
+        <span class="case-label bg">段 1 · 背景还原</span>
+        <p><strong>委托</strong>：某大型保险公司找到 Bob Moesta 团队，车险新客获取成本连年攀升，但续保率持续走低——<strong>每年约 30% 的客户在续保时流失</strong>。</p>
+        <p><strong>第一直觉</strong>：团队认为是"价格敏感"问题。标准做法——降低保费、增加折扣、发送续保提醒短信、简化续保流程。投入几百万做了"一键续保"功能。</p>
+        <p><strong>数据异常</strong>："一键续保"上线后，点击率很高但<strong>实际续保率几乎没变</strong>。更奇怪的是——<strong>大部分流失客户，新保险的价格并不比原保险便宜</strong>，有些人甚至付了更高的保费。</p>
+        <p><strong>深访转折</strong>：团队停止问"你对我们的保险有什么不满意"，改问一个完全不同的问题——<strong>"你上次换保险的时候，发生了什么？"</strong></p>
     </div>
-
-    <div class="key-point" style="border-left-color:#a855f7;">
-        <strong>Step 2 切片情境</strong>：何时/何地/何心情？<br>
-        → 发现 <strong>40% 奶昔在早 8 点前</strong>售出，下午几乎不动 → 时段切片
+    <div class="case-section">
+        <span class="case-label method">段 2 · 4步流程视角切入</span>
+        <p><strong>第1步 · 识别 Job</strong>：用户不是"买保险"，而是"在一年一度这个时间点，完成'维持合法上路+不被坑'的任务"。车险对大多数人是<strong>被动触发任务</strong>——只有到期前几周才被激活。</p>
+        <p style="margin-top:6px;"><strong>第2步 · 切片拆解</strong>：</p>
+        <div style="margin-top:4px; padding:8px 12px; background:#f0f9ff; border-radius:6px; font-size:13px;">
+            <div class="case-line"><span class="label">功能</span><span>最低保费、覆盖必要险种、不需要的不买</span></div>
+            <div class="case-line"><span class="label">情感</span><span><strong>不焦虑</strong>——"我不会被坑""我没多花钱"</span></div>
+            <div class="case-line"><span class="label">社交</span><span>跟朋友聊起来不觉得自己"买贵了/被骗了"</span></div>
+        </div>
+        <p style="margin-top:8px;"><strong>第3步 · 找痛点</strong>：不是"保费太贵"，而是——</p>
+        <div style="margin-top:4px; padding:8px 12px; background:#fef2f2; border-radius:6px; font-size:13px;">
+            <div>😣 <strong>痛点1</strong>：各家公司报价口径不统一，"根本对比不出来哪家便宜"</div>
+            <div>😣 <strong>痛点2</strong>：条款全是法律术语，"买完才知道这不赔那不赔"</div>
+            <div>😣 <strong>痛点3</strong>：续保时发现去年理赔过一次，今年保费涨了，"感觉被惩罚"</div>
+        </div>
+        <p style="margin-top:8px;"><strong>第4步 · 设计方案</strong>（基于真实痛点，不是"降价"）：</p>
+        <div style="margin-top:4px; padding:8px 12px; background:#f0fdf4; border-radius:6px; font-size:13px;">
+            <div>✅ <strong>统一对比表</strong>——把所有公司报价按"同样覆盖"归一化对比，用户一眼看出真实差价</div>
+            <div>✅ <strong>"翻译"条款</strong>——把法律术语翻译成"什么时候赔、什么时候不赔"的人话</div>
+            <div>✅ <strong>涨价说明</strong>——理赔后涨价时主动解释"为什么涨、涨多少、什么时候恢复"</div>
+        </div>
     </div>
-
-    <div class="key-point" style="border-left-color:#22c55e;">
-        <strong>Step 3 找痛点</strong>：每个时段的现有方案有什么不满？<br>
-        → 早晨：饥饿+无聊+手忙 → 现有方案都不行<br>
-        → 下午：妈妈需要哄娃又不给糖 → 现有方案都不行
-    </div>
-
-    <div class="key-point" style="border-left-color:#f59e0b;">
-        <strong>Step 4 设计方案</strong>：让奶昔更好地完成每个 Job<br>
-        → 早间加稠+细吸管+单手喝（扛饿+便携）<br>
-        → 下午小杯+果味甜（哄娃+不甜腻）<br>
-        → 晚上经典款（解馋+罪感低）<br>
-        → <strong>结果：单店销量翻倍 ✅</strong>
+    <div class="case-section">
+        <span class="case-label result">段 3 · 方法论抽离</span>
+        <p><strong>改进动作</strong>：不是"降价/一键续保"，而是在用户最焦虑的<strong>三个痛点环节</strong>提供"消除焦虑"的方案。</p>
+        <p><strong>结果</strong>：续保率提升超过 20%，且客户满意度显著上升——<strong>不是因为更便宜，而是因为"不再焦虑"</strong>。</p>
+        <div class="essence" style="margin-top:10px;">💡 <strong>4 条可迁移的 4 步流程思维</strong></div>
+        <div class="key-point" style="border-left-color:#22c55e; background:#f0fdf4;">1️⃣ <strong>Job 是起点不是终点</strong>：不问"你要什么产品"，问"你要完成什么任务"——这一步做错，后面三步全错。</div>
+        <div class="key-point" style="border-left-color:#22c55e; background:#f0fdf4;">2️⃣ <strong>三维切片才能看全</strong>：功能/情感/社交缺一不可。车险的<strong>情感维度</strong>（不焦虑）比功能维度（保费低）更驱动决策。</div>
+        <div class="key-point" style="border-left-color:#22c55e; background:#f0fdf4;">3️⃣ <strong>痛点不是"产品缺陷"</strong>：是"用户在完成任务的链条上卡住的地方"。车险的痛点不是"保费太贵"，是"对比不了、看不懂、被惩罚"。</div>
+        <div class="key-point" style="border-left-color:#22c55e; background:#f0fdf4;">4️⃣ <strong>设计不是"加功能"</strong>：是"消除痛点"。加一个"统一对比表"胜过降价 200 块。</div>
     </div>
 </div>
 
-<!-- ==================== 1 分钟·核心应用 ==================== -->
+<!-- ==================== 1.5 分钟·核心应用 ==================== -->
 <div class="section">
-    <div class="section-title">🛠️ 1 分钟｜核心应用 <span class="time">1min</span></div>
-
-    <div class="key-point">
-        <strong>任何产品创新</strong>都先跑这 4 步：
-    </div>
-    <div class="key-point">✅ <strong>Step 1</strong>：抛开产品功能，问"用户的 Job 是什么"</div>
-    <div class="key-point">✅ <strong>Step 2</strong>：按情境切片（早/午/晚 / 工作/家庭 / 新客/老客）</div>
-    <div class="key-point">✅ <strong>Step 3</strong>：找痛点 = 现有方案的缺陷（用户凑合/离职/不买的根因）</div>
-    <div class="key-point">✅ <strong>Step 4</strong>：方案 = 产品 + 服务 + 体验的组合（不只改产品）</div>
+    <div class="section-title">🛠️ 1.5 分钟｜4步流程在日常工作中的应用 <span class="time">1.5min</span></div>
+    <div class="key-point"><strong>任何"产品改进"讨论</strong>，都可以用4步流程重新框架化</div>
+    <div class="key-point">✅ <strong>做用户调研前</strong>：先用第1步搞清楚——"我在找什么 Job？"而不是"用户喜欢什么功能？"</div>
+    <div class="key-point">✅ <strong>看竞品时</strong>：用第2步切片——竞品在功能/情感/社交哪个维度打中了用户的 Job？</div>
+    <div class="key-point">✅ <strong>收到差评时</strong>：用第3步判断——这个抱怨是"产品缺陷"还是"任务链上的痛点"？两者解法完全不同</div>
+    <div class="key-point">✅ <strong>写产品需求时</strong>：用第4步检验——"这个方案消除的是哪个痛点？还是只是在'让产品更好'？"</div>
 </div>
 
-<!-- ==================== 1 分钟·1 道思考题 ==================== -->
+<!-- ==================== 4 分钟·1 道思考题 ==================== -->
 <div class="quiz">
-    <h2>📝 1 道思考题 <span class="time">1min</span> <span class="ratio-tag">100% 经典案例</span></h2>
+    <h2>📝 1 道思考题 <span class="time">4min</span> <span class="ratio-tag">100% 经典案例</span></h2>
 
-    <div class="highlight-box">
-        <strong>经典案例题</strong>：用 JTBD <strong>4 步流程</strong> 拆解 "<strong>瑞幸 vs 蜜雪冰城</strong>"：它们雇用的 Job 有什么不同？
+    <div class="case-background">
+        <strong style="font-size:15px;">🏨 实战委托：悦行酒店集团 · 会员体系困境</strong>
+        <div class="emoji-bullet"><span>📋</span><span>悦行酒店集团（旗下 200+ 中高端酒店，覆盖全国主要城市）推出会员忠诚度计划 3 年，但<strong>活跃会员占比仅 12%</strong>（行业平均 25%），会员年均预订频次仅 1.3 次。集团 CMO 找到你，希望用 JTBD 4 步流程重新审视会员体系。</span></div>
+        <div class="emoji-bullet"><span>🤔</span><span><strong>第一直觉</strong>：团队认为"激励不够"——于是<strong>加大积分力度</strong>（住一晚从 500 积分涨到 1000 积分）、<strong>增加兑换品类</strong>（从 50 种扩到 200 种）、<strong>降低升级门槛</strong>（金卡从 20 晚降到 12 晚）。投入预算翻倍。</span></div>
+        <div class="emoji-bullet"><span>📊</span><span><strong>数据异常</strong>：活动跑了半年，积分发放量翻了 2.3 倍，但<strong>积分兑换率反而从 18% 降到 11%</strong>。更诡异的是——<strong>金卡会员流失率不降反升</strong>（从 8% 升到 14%）。深度访谈发现：很多金卡会员说"积分太多了根本用不完，攒着也不知道干嘛"。</span></div>
+        <div class="emoji-bullet"><span>🔍</span><span><strong>关键矛盾</strong>：给得越多 → 用得越少 → 流失越快。激励翻倍，效果减半。团队困惑：<strong>到底是激励设计问题、沟通问题、还是根本没搞清会员"雇用"积分完成什么任务？</strong></span></div>
     </div>
 
-    <p style="font-size:13px; margin:6px 0;">
-        <strong>答题要求</strong>（按 4 步流程拆解）：
-    </p>
+    <div class="highlight-box" style="margin-top:10px;">
+        <strong>🎯 你的任务（用 JTBD 4 步流程分析，不是凭经验猜）</strong>
+    </div>
     <ol>
-        <li><strong>Step 1 识别 Job</strong>：瑞幸/蜜雪冰城被雇用的核心 Job 各是什么（不只是"喝咖啡/喝奶茶"）？</li>
-        <li><strong>Step 2 切片情境</strong>：两个品牌各自对应什么时间/地点/心情的 Job？</li>
-        <li><strong>Step 3 找痛点</strong>：对方品牌在对方的核心 Job 上有什么满足不了？</li>
-        <li><strong>Step 4 设计方案</strong>：如果只能各改 1 个动作来更好地完成对方核心 Job，你改什么？</li>
+        <li><strong>识别 Job</strong>：商务旅客在出差场景下，"雇用"酒店会员体系完成什么任务？（不是"订酒店"，挖到底层目标）</li>
+        <li><strong>三维切片</strong>：把这个 Job 拆成功能需求 + 情感需求 + 社交需求</li>
+        <li><strong>找痛点</strong>：当前会员体系在哪个环节卡住了用户？至少找 2 个具体痛点（不是"积分太少"这种表象）</li>
+        <li><strong>设计方案</strong>：基于真实痛点，给一个具体改进方案（不是"增加积分/降低门槛"这种"让产品更好"的思路）</li>
     </ol>
 
-    <ul>
-        <li>❌ 不要停留在"口感/价格/店面装修"等表面特征</li>
-        <li>✅ 必须用 4 步框架的术语（J / 情境 / 痛点 / 方案）</li>
-        <li>✅ 提示：参考奶昔"按时间切片"思路，瑞幸和蜜雪冰城可能在不同时段雇用了不同 Job</li>
-    </ul>
-
-    <div class="highlight-box" style="margin-top:8px;">
-        ⏰ <strong>5 分钟全过程</strong>：学 1min + 反馈 1min + 答题 1min + 思考 2min<br>
-        📊 <strong>考察能力</strong>：JTBD 4 步流程显式调用 + 按情境切片 + 区分功能 vs Job<br>
-        🔗 <strong>下一节</strong>：Day03 · 3 个核心工具（Job Map / Job Statement / Forces）
+    <div class="highlight-box">
+        ⏰ <strong>10 分钟全过程</strong>：读 4步定义 1.5min → 读车险案例 3min → 看核心应用 1.5min → 答题 4min<br>
+        📊 <strong>考察能力</strong>：JTBD 4步流程显式调用 + Job 三维切片 + 区分"产品缺陷"vs"任务链痛点"<br>
+        🔗 <strong>下一节</strong>：Day03 · 3个核心工具（Job Map / Job Statement / Forces of Progress）
     </div>
-    <!-- ==================== v2 答题输入区 ==================== -->
-    <div class="answer-box">
-        <div class="answer-box-title">✍️ 在这里写你的答案（不必退出页面）</div>
-        <textarea id="answer-day02" placeholder="Step 1 识别 Job：瑞幸/蜜雪冰城被雇用的核心 Job 各是什么？&#10;T（Trigger 触发）: 何时何地触发？&#10;B（Barrier 阻碍）: 当前的痛点？&#10;D（Desired outcome 期望）: 完成的标志？&#10;&#10;用 按 4 步流程（识别 / 切片 / 痛点 / 方案）拆解..."></textarea>
-        <div class="answer-actions">
-            <button id="submit-day02" class="btn-primary">💾 保存到本地 + 同步 Gist</button>
-            <button id="copy-day02" class="btn-secondary">📋 复制到聊天</button>
-            <span id="status-day02" class="status-text"></span>
+
+    <!-- 分框答题区 -->
+    <div class="answer-grid">
+        <div class="answer-field">
+            <div class="answer-field-label">🔍 框 1 · 识别 Job（第1步）</div>
+            <div class="answer-field-hint">提示：不是"订酒店""攒积分""换礼品"。商务旅客出差时真正的任务是什么？挖到底层目标——参考车险案例"维持合法上路+不被坑"。</div>
+            <textarea id="answer-day02-1" placeholder="商务旅客'雇用'酒店会员体系完成的任务是：……&#10;（注意：不是'订酒店'这种功能描述，挖到底层目标）"></textarea>
         </div>
-        <details class="token-config">
-            <summary>⚙️ GitHub Token 配置（首次使用 Gist 同步需要）</summary>
-            <p>
-                1. 去 <a href="https://github.com/settings/personal-access-tokens" target="_blank">GitHub Settings → Personal access tokens → Fine-grained tokens</a> 创建 token<br>
-                2. 勾选 <strong>Only select repositories</strong> → 选 <code>kkwbkk/jtbd-cards</code><br>
-                3. 权限只勾 <strong>Gists: Read and write</strong>，其他全部不勾<br>
-                4. 复制 token 粘贴到下面（<strong>只存本地，不上传</strong>）
-            </p>
-            <input type="password" id="token-day02" placeholder="github_pat_xxxxxxxxxxxx">
-            <button id="save-token-day02" class="btn-secondary" style="margin-top:4px;">保存 Token</button>
-        </details>
+
+        <div class="answer-field">
+            <div class="answer-field-label">📐 框 2 · 三维切片（第2步）</div>
+            <div class="answer-field-hint">提示：功能=完成什么具体动作？ 情感=想感受什么？ 社交=想被怎么看？ 参考车险——情感维度（不焦虑）可能比功能维度更重要。</div>
+            <textarea id="answer-day02-2" placeholder="功能需求：……&#10;情感需求：……&#10;社交需求：……"></textarea>
+        </div>
+
+        <div class="answer-field">
+            <div class="answer-field-label">😣 框 3 · 找痛点（第3步）</div>
+            <div class="answer-field-hint">提示：不是"积分太少""兑换品类不够"这种产品缺陷。找"任务链上卡住的地方"——参考车险：不是保费太贵，是"对比不了""看不懂""被惩罚"。</div>
+            <textarea id="answer-day02-3" placeholder="痛点1：……&#10;&#10;痛点2：……&#10;&#10;（每个痛点要说清楚：卡在任务链的哪一步？为什么其他方案不行？）"></textarea>
+        </div>
+
+        <div class="answer-field">
+            <div class="answer-field-label">🎯 框 4 · 设计方案（第4步）</div>
+            <div class="answer-field-hint">提示：不是"增加积分/降低门槛/更多兑换"这种"让产品更好"。基于框3的真实痛点，设计消除痛点的方案。</div>
+            <textarea id="answer-day02-4" placeholder="改进方案：……&#10;&#10;这个方案消除的痛点是：……&#10;&#10;为什么不是'让产品更好'而是'消除痛苦点'：……"></textarea>
+        </div>
     </div>
 
-    <script>
-    (function() {
-        const DAY_KEY = 'day02';
-        const VERSION = 'v2';
-        const ANSWER_KEY = `jtbd_${DAY_KEY}_${VERSION}_answer`;
-        const TOKEN_KEY = 'jtbd_gist_token';
-        const REPO = 'kkwbkk/jtbd-cards';
-
-        const $answer = document.getElementById('answer-day02');
-        const $submit = document.getElementById('submit-day02');
-        const $copy = document.getElementById('copy-day02');
-        const $status = document.getElementById('status-day02');
-        const $token = document.getElementById('token-day02');
-        const $saveToken = document.getElementById('save-token-day02');
-
-        function setStatus(msg, type) {
-            $status.textContent = msg;
-            $status.className = `status-text status-${type}`;
-        }
-
-        // 恢复已保存答案
-        const savedAnswer = localStorage.getItem(ANSWER_KEY);
-        if (savedAnswer) {
-            $answer.value = savedAnswer;
-        }
-
-        // 恢复已保存 token（仅显示，不显示完整值）
-        const savedToken = localStorage.getItem(TOKEN_KEY);
-        if (savedToken) {
-            $token.value = '已保存（' + savedToken.slice(-4) + '）';
-            $token.disabled = true;
-            $saveToken.textContent = '🔄 重新配置';
-        }
-
-        // 保存按钮：localStorage + Gist
-        $submit.addEventListener('click', async () => {
-            const answer = $answer.value.trim();
-            if (!answer) {
-                setStatus('⚠️ 请先写答案', 'warn');
-                $answer.focus();
-                return;
-            }
-
-            // 1. localStorage
-            try {
-                localStorage.setItem(ANSWER_KEY, answer);
-            } catch (e) {
-                setStatus('❌ 本地保存失败：' + e.message, 'error');
-                return;
-            }
-
-            // 2. Gist 同步
-            const token = localStorage.getItem(TOKEN_KEY);
-            if (!token) {
-                setStatus('✅ 已保存本地（未配 token，未同步 Gist）', 'warn');
-                return;
-            }
-
-            setStatus('🔄 同步 Gist 中...', 'pending');
-            const today = new Date().toISOString().split('T')[0];
-            const filename = `day02_${today}.md`;
-            const content = `# JTBD Day02 答案\n\n${answer}\n\n---\n提交时间: ${new Date().toLocaleString('zh-CN')}\n卡片版本: ${VERSION}\n`;
-            try {
-                // 先查是否已有今天的 gist（同名 filename）
-                const listResp = await fetch(`https://api.github.com/gists?per_page=100&since=${today}T00:00:00Z`, {
-                    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
-                });
-                if (!listResp.ok) throw new Error(`list: HTTP ${listResp.status}`);
-                const gists = await listResp.json();
-                const existing = gists.find(g => g.files && g.files[filename]);
-
-                let resp;
-                if (existing) {
-                    // 更新现有 gist
-                    resp = await fetch(`https://api.github.com/gists/${existing.id}`, {
-                        method: 'PATCH',
-                        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ files: { [filename]: { content } } })
-                    });
-                } else {
-                    // 创建新 gist
-                    resp = await fetch('https://api.github.com/gists', {
-                        method: 'POST',
-                        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            description: `JTBD Day02 答案 - ${today}`,
-                            public: false,
-                            files: { [filename]: { content } }
-                        })
-                    });
-                }
-                if (!resp.ok) {
-                    const errText = await resp.text();
-                    throw new Error(`HTTP ${resp.status}: ${errText.slice(0, 100)}`);
-                }
-                const data = await resp.json();
-                setStatus(`✅ 已同步 Gist`, 'success');
-            } catch (e) {
-                setStatus('❌ Gist 失败：' + e.message.slice(0, 60), 'error');
-            }
-        });
-
-        // 复制按钮
-        $copy.addEventListener('click', async () => {
-            const answer = $answer.value.trim();
-            if (!answer) {
-                setStatus('⚠️ 请先写答案', 'warn');
-                $answer.focus();
-                return;
-            }
-            const text = `【Day02 答案】\n${answer}\n\n（提交时间：${new Date().toLocaleString('zh-CN')}）`;
-            try {
-                await navigator.clipboard.writeText(text);
-                setStatus('📋 已复制，去聊天粘贴给小马', 'success');
-            } catch (e) {
-                setStatus('❌ 复制失败：' + e.message, 'error');
-            }
-        });
-
-        // Token 保存
-        $saveToken.addEventListener('click', () => {
-            if ($token.disabled) {
-                // 重新配置
-                $token.disabled = false;
-                $token.value = '';
-                $token.placeholder = 'github_pat_xxxxxxxxxxxx';
-                $saveToken.textContent = '保存 Token';
-                return;
-            }
-            const token = $token.value.trim();
-            if (!token || !token.startsWith('github_')) {
-                setStatus('⚠️ token 格式不对（应以 github_ 开头）', 'warn');
-                return;
-            }
-            localStorage.setItem(TOKEN_KEY, token);
-            $token.value = '已保存（' + token.slice(-4) + '）';
-            $token.disabled = true;
-            $saveToken.textContent = '🔄 重新配置';
-            setStatus('✅ Token 已保存（仅本地）', 'success');
-        });
-    })();
-    </script>
-</div>
+    <div class="answer-actions">
+        <button id="submit-day02" class="btn-primary">💾 保存到本地</button>
+        <button id="copy-day02" class="btn-secondary">📋 复制答案到聊天</button>
+        <span id="status-day02" class="status-text"></span>
+    </div>
 </div>
 
-<!-- ==================== 反馈资源（4 个）==================== -->
+<!-- ==================== 资源推荐 ==================== -->
 <div class="section">
-    <div class="section-title">📚 反馈资源（4 个 · 按你的时间选看 1-2 个）<span class="time">1min</span></div>
-
-    <div class="highlight-box" style="background:#fef3c7; border-left:3px solid #f59e0b; color:#78350f; padding:6px 10px; margin:6px 0; border-radius:4px; font-size:11px;">
-        💡 <strong>选看建议</strong>：Day01 视频看过的可以跳过；新加的"5 个深访技巧"是 Day04 预告，可以现在看也可以等。
-    </div>
-
-    <a href="https://www.bilibili.com/video/BV1uXsVeGE3A/" target="_blank" class="resource">
-        <span class="resource-icon">🎬</span>
-        <div style="flex:1;">
-            <strong>① 焦糖布丁访谈的5个技巧——5 Tips for Conducting JTBD Interviews</strong> <span class="resource-badge">8:38</span>
-            <div class="resource-meta">竟然爱上草莓了 · 2024-08-29 · Bob Moesta 真实深访技巧 · <strong>Day04 预告</strong></div>
-        </div>
-    </a>
-
-    <a href="https://www.bilibili.com/video/BV1X2P7euE3Q/" target="_blank" class="resource">
-        <span class="resource-icon">🎬</span>
-        <div style="flex:1;">
-            <strong>② JTBD理论全解析-带你探究需求的本质</strong> <span class="resource-badge">5:08</span>
-            <div class="resource-meta">侯哥说产品 · 2025-02-27 · 4 步流程详解</div>
-        </div>
-    </a>
-
-    <a href="https://www.bilibili.com/video/BV1kbPrzEEv3/" target="_blank" class="resource">
-        <span class="resource-icon">🎬</span>
-        <div style="flex:1;">
-            <strong>③ （中字）Jobs To Be Done | How to use JTBD in product design</strong> <span class="resource-badge">10:03</span>
-            <div class="resource-meta">探潮实验室 · 2026-03-05 · 中文字幕 · 4 步应用</div>
-        </div>
-    </a>
-
-    <a href="https://weread.qq.com/web/reader/c8532ab071543c07c85a3f2" target="_blank" class="resource">
+    <div class="section-title">📚 延伸阅读 <span class="time">可选</span></div>
+    <a class="resource" href="https://book.douban.com/subject/26889246/" target="_blank">
         <span class="resource-icon">📘</span>
-        <div style="flex:1;">
-            <strong>④ Christensen《与运气竞争》第 4-5 章</strong> <span class="resource-badge">核心 4 步</span>
-            <div class="resource-meta">微信读书 · 4 步流程的源头</div>
+        <div>
+            <div>《与运气竞争》Clayton Christensen 等</div>
+            <div class="resource-meta">JTBD 方法论经典之作，第5-7章详述发现 Job 的流程</div>
         </div>
     </a>
+    <a class="resource" href="https://jtbd.info/" target="_blank">
+        <span class="resource-icon">🌐</span>
+        <div>
+            <div>JTBD.info · Alan Klement 社区</div>
+            <div class="resource-meta">大量 JTBD 4步流程真实案例与实践文章</div>
+        </div>
+    </a>
+    <div class="resource" style="cursor:default; opacity:0.6;">
+        <span class="resource-icon">🎬</span>
+        <div>
+            <div>⚠️ 待实测补充：Bob Moesta JTBD 4步流程讲解视频</div>
+            <div class="resource-meta">出题前需用浏览器验证 B站/YouTube 链接可播放</div>
+        </div>
+    </div>
 </div>
 
-<!-- ==================== 底部 ==================== -->
+<!-- ==================== 页脚 ==================== -->
 <div class="footer">
-    <div class="day-info">📍 Week 1 · Day 2 · JTBD 4 步流程 · 5分钟版</div>
-    <p style="margin-top:4px;">
-        <strong>5 分钟路径</strong>：① 读 4 步定义 1min → ② 看奶昔 4 步拆解 2min → ③ 看核心应用 1min → ④ 答题 1min
-    </p>
-    <p style="margin-top:4px; font-size:10px; color:#d1d5db;">
-        出题：2026-06-22 Day02 · 4 个资源全部实测可访问 · 题目来源：100% 经典案例
-    </p>
+    <div class="day-info">Day02 · JTBD 4步核心流程 · v3</div>
+    <div style="margin-top:4px; font-size:11px;">
+        📅 2026-06-24 · 🔗 <a href="https://kkwbkk.github.io/jtbd-cards/day02.html" style="color:#0369a1;">day02.html</a><br>
+        📖 JTBD · 第 2 天（共 7 天）· 下一节：Day03 · 3个核心工具
+    </div>
 </div>
+
+<!-- ==================== JavaScript 答题存储 ==================== -->
+<script>
+(function() {
+    const PREFIX = 'jtbd-day02-';
+    const FIELD_IDS = ['answer-day02-1', 'answer-day02-2', 'answer-day02-3', 'answer-day02-4'];
+    
+    // 加载本地存储
+    FIELD_IDS.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var saved = localStorage.getItem(PREFIX + id);
+        if (saved) el.value = saved;
+        el.addEventListener('input', function() {
+            localStorage.setItem(PREFIX + id, el.value);
+        });
+    });
+    
+    // 保存按钮
+    var submitBtn = document.getElementById('submit-day02');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', function() {
+            var status = document.getElementById('status-day02');
+            var hasContent = false;
+            FIELD_IDS.forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el && el.value.trim()) {
+                    localStorage.setItem(PREFIX + id, el.value);
+                    hasContent = true;
+                }
+            });
+            if (hasContent) {
+                status.textContent = '✅ 已保存到本地';
+                status.className = 'status-text status-success';
+            } else {
+                status.textContent = '⚠️ 请先填写答案';
+                status.className = 'status-text status-warn';
+            }
+            setTimeout(function() { status.textContent = ''; }, 3000);
+        });
+    }
+    
+    // 复制按钮
+    var copyBtn = document.getElementById('copy-day02');
+    if (copyBtn) {
+        copyBtn.addEventListener('click', function() {
+            var parts = [];
+            var labels = ['🔍 识别 Job', '📐 三维切片', '😣 找痛点', '🎯 设计方案'];
+            FIELD_IDS.forEach(function(id, i) {
+                var el = document.getElementById(id);
+                if (el && el.value.trim()) {
+                    parts.push(labels[i] + '\n' + el.value.trim());
+                }
+            });
+            if (parts.length === 0) {
+                var status = document.getElementById('status-day02');
+                status.textContent = '⚠️ 没有答案可复制';
+                status.className = 'status-text status-warn';
+                setTimeout(function() { status.textContent = ''; }, 2000);
+                return;
+            }
+            var text = '【Day02 答题 · JTBD 4步流程】\n\n' + parts.join('\n\n---\n\n');
+            navigator.clipboard.writeText(text).then(function() {
+                var status = document.getElementById('status-day02');
+                status.textContent = '✅ 已复制！粘贴到聊天发给小马';
+                status.className = 'status-text status-success';
+                setTimeout(function() { status.textContent = ''; }, 3000);
+            }).catch(function() {
+                var status = document.getElementById('status-day02');
+                status.textContent = '❌ 复制失败，请手动选中复制';
+                status.className = 'status-text status-error';
+                setTimeout(function() { status.textContent = ''; }, 3000);
+            });
+        });
+    }
+})();
+</script>
 
 </body>
 </html>
