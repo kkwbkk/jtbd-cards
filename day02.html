@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>每日方法论小课堂 #002 · 5分钟版 · JTBD 4 步流程</title>
+    <title>每日方法论小课堂 #002 · 5分钟版 · JTBD 4 步流程 · v2（带答题框）</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -222,6 +222,103 @@
             font-weight: 600;
             margin-left: 6px;
         }
+    <style>
+        /* v6 答题区样式 */
+        .answer-box {
+            margin: 12px 0;
+            padding: 12px;
+            background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+            border-left: 3px solid #3b82f6;
+            border-radius: 6px;
+        }
+        .answer-box-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 6px;
+        }
+        .answer-box textarea {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #93c5fd;
+            border-radius: 4px;
+            font-family: -apple-system, sans-serif;
+            font-size: 13px;
+            line-height: 1.5;
+            resize: vertical;
+            min-height: 120px;
+            background: white;
+            color: #1f2937;
+        }
+        .answer-box textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        .answer-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary, .btn-secondary {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s;
+        }
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+        .btn-primary:hover { background: #2563eb; }
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+        }
+        .btn-secondary:hover { background: #d1d5db; }
+        .status-text {
+            font-size: 11px;
+            margin-left: 4px;
+            font-weight: 500;
+        }
+        .status-success { color: #059669; }
+        .status-warn { color: #d97706; }
+        .status-error { color: #dc2626; }
+        .status-pending { color: #2563eb; }
+        .token-config {
+            margin-top: 10px;
+            font-size: 12px;
+            background: #fffbeb;
+            padding: 6px 10px;
+            border-radius: 4px;
+            border-left: 3px solid #f59e0b;
+        }
+        .token-config summary {
+            cursor: pointer;
+            font-weight: 500;
+            color: #78350f;
+        }
+        .token-config p {
+            margin: 6px 0;
+            color: #78350f;
+            line-height: 1.5;
+        }
+        .token-config input {
+            width: 100%;
+            padding: 6px 8px;
+            margin: 4px 0;
+            font-family: monospace;
+            font-size: 12px;
+            border: 1px solid #d97706;
+            border-radius: 3px;
+            background: white;
+        }
+    </style>
     </style>
 </head>
 <body>
@@ -351,6 +448,171 @@
         📊 <strong>考察能力</strong>：JTBD 4 步流程显式调用 + 按情境切片 + 区分功能 vs Job<br>
         🔗 <strong>下一节</strong>：Day03 · 3 个核心工具（Job Map / Job Statement / Forces）
     </div>
+    <!-- ==================== v2 答题输入区 ==================== -->
+    <div class="answer-box">
+        <div class="answer-box-title">✍️ 在这里写你的答案（不必退出页面）</div>
+        <textarea id="answer-day02" placeholder="Step 1 识别 Job：瑞幸/蜜雪冰城被雇用的核心 Job 各是什么？&#10;T（Trigger 触发）: 何时何地触发？&#10;B（Barrier 阻碍）: 当前的痛点？&#10;D（Desired outcome 期望）: 完成的标志？&#10;&#10;用 按 4 步流程（识别 / 切片 / 痛点 / 方案）拆解..."></textarea>
+        <div class="answer-actions">
+            <button id="submit-day02" class="btn-primary">💾 保存到本地 + 同步 Gist</button>
+            <button id="copy-day02" class="btn-secondary">📋 复制到聊天</button>
+            <span id="status-day02" class="status-text"></span>
+        </div>
+        <details class="token-config">
+            <summary>⚙️ GitHub Token 配置（首次使用 Gist 同步需要）</summary>
+            <p>
+                1. 去 <a href="https://github.com/settings/personal-access-tokens" target="_blank">GitHub Settings → Personal access tokens → Fine-grained tokens</a> 创建 token<br>
+                2. 勾选 <strong>Only select repositories</strong> → 选 <code>kkwbkk/jtbd-cards</code><br>
+                3. 权限只勾 <strong>Gists: Read and write</strong>，其他全部不勾<br>
+                4. 复制 token 粘贴到下面（<strong>只存本地，不上传</strong>）
+            </p>
+            <input type="password" id="token-day02" placeholder="github_pat_xxxxxxxxxxxx">
+            <button id="save-token-day02" class="btn-secondary" style="margin-top:4px;">保存 Token</button>
+        </details>
+    </div>
+
+    <script>
+    (function() {
+        const DAY_KEY = 'day02';
+        const VERSION = 'v2';
+        const ANSWER_KEY = `jtbd_${DAY_KEY}_${VERSION}_answer`;
+        const TOKEN_KEY = 'jtbd_gist_token';
+        const REPO = 'kkwbkk/jtbd-cards';
+
+        const $answer = document.getElementById('answer-day02');
+        const $submit = document.getElementById('submit-day02');
+        const $copy = document.getElementById('copy-day02');
+        const $status = document.getElementById('status-day02');
+        const $token = document.getElementById('token-day02');
+        const $saveToken = document.getElementById('save-token-day02');
+
+        function setStatus(msg, type) {
+            $status.textContent = msg;
+            $status.className = `status-text status-${type}`;
+        }
+
+        // 恢复已保存答案
+        const savedAnswer = localStorage.getItem(ANSWER_KEY);
+        if (savedAnswer) {
+            $answer.value = savedAnswer;
+        }
+
+        // 恢复已保存 token（仅显示，不显示完整值）
+        const savedToken = localStorage.getItem(TOKEN_KEY);
+        if (savedToken) {
+            $token.value = '已保存（' + savedToken.slice(-4) + '）';
+            $token.disabled = true;
+            $saveToken.textContent = '🔄 重新配置';
+        }
+
+        // 保存按钮：localStorage + Gist
+        $submit.addEventListener('click', async () => {
+            const answer = $answer.value.trim();
+            if (!answer) {
+                setStatus('⚠️ 请先写答案', 'warn');
+                $answer.focus();
+                return;
+            }
+
+            // 1. localStorage
+            try {
+                localStorage.setItem(ANSWER_KEY, answer);
+            } catch (e) {
+                setStatus('❌ 本地保存失败：' + e.message, 'error');
+                return;
+            }
+
+            // 2. Gist 同步
+            const token = localStorage.getItem(TOKEN_KEY);
+            if (!token) {
+                setStatus('✅ 已保存本地（未配 token，未同步 Gist）', 'warn');
+                return;
+            }
+
+            setStatus('🔄 同步 Gist 中...', 'pending');
+            const today = new Date().toISOString().split('T')[0];
+            const filename = `day02_${today}.md`;
+            const content = `# JTBD Day02 答案\n\n${answer}\n\n---\n提交时间: ${new Date().toLocaleString('zh-CN')}\n卡片版本: ${VERSION}\n`;
+            try {
+                // 先查是否已有今天的 gist（同名 filename）
+                const listResp = await fetch(`https://api.github.com/gists?per_page=100&since=${today}T00:00:00Z`, {
+                    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+                });
+                if (!listResp.ok) throw new Error(`list: HTTP ${listResp.status}`);
+                const gists = await listResp.json();
+                const existing = gists.find(g => g.files && g.files[filename]);
+
+                let resp;
+                if (existing) {
+                    // 更新现有 gist
+                    resp = await fetch(`https://api.github.com/gists/${existing.id}`, {
+                        method: 'PATCH',
+                        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ files: { [filename]: { content } } })
+                    });
+                } else {
+                    // 创建新 gist
+                    resp = await fetch('https://api.github.com/gists', {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            description: `JTBD Day02 答案 - ${today}`,
+                            public: false,
+                            files: { [filename]: { content } }
+                        })
+                    });
+                }
+                if (!resp.ok) {
+                    const errText = await resp.text();
+                    throw new Error(`HTTP ${resp.status}: ${errText.slice(0, 100)}`);
+                }
+                const data = await resp.json();
+                setStatus(`✅ 已同步 Gist`, 'success');
+            } catch (e) {
+                setStatus('❌ Gist 失败：' + e.message.slice(0, 60), 'error');
+            }
+        });
+
+        // 复制按钮
+        $copy.addEventListener('click', async () => {
+            const answer = $answer.value.trim();
+            if (!answer) {
+                setStatus('⚠️ 请先写答案', 'warn');
+                $answer.focus();
+                return;
+            }
+            const text = `【Day02 答案】\n${answer}\n\n（提交时间：${new Date().toLocaleString('zh-CN')}）`;
+            try {
+                await navigator.clipboard.writeText(text);
+                setStatus('📋 已复制，去聊天粘贴给小马', 'success');
+            } catch (e) {
+                setStatus('❌ 复制失败：' + e.message, 'error');
+            }
+        });
+
+        // Token 保存
+        $saveToken.addEventListener('click', () => {
+            if ($token.disabled) {
+                // 重新配置
+                $token.disabled = false;
+                $token.value = '';
+                $token.placeholder = 'github_pat_xxxxxxxxxxxx';
+                $saveToken.textContent = '保存 Token';
+                return;
+            }
+            const token = $token.value.trim();
+            if (!token || !token.startsWith('github_')) {
+                setStatus('⚠️ token 格式不对（应以 github_ 开头）', 'warn');
+                return;
+            }
+            localStorage.setItem(TOKEN_KEY, token);
+            $token.value = '已保存（' + token.slice(-4) + '）';
+            $token.disabled = true;
+            $saveToken.textContent = '🔄 重新配置';
+            setStatus('✅ Token 已保存（仅本地）', 'success');
+        });
+    })();
+    </script>
+</div>
 </div>
 
 <!-- ==================== 反馈资源（4 个）==================== -->
