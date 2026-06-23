@@ -3,32 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>每日方法论小课堂 #001 · 10分钟版 · JTBD焦糖布丁 · v7（3段式案例+实战背景题）</title>
+    <title>每日方法论小课堂 #001 · 10分钟版 · JTBD · v8（价值钩子+分框答题）</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 16px;
-            background: linear-gradient(180deg, #fef9f3 0%, #ffffff 100%);
-            color: #1f2937;
-            line-height: 1.6;
-            font-size: 15px;
+            max-width: 720px; margin: 0 auto; padding: 16px;
+            background: linear-gradient(180deg, #fef9f3 0%, #ffffff 100%); color: #1f2937; line-height: 1.6; font-size: 15px;
         }
-        .memory-hook-top {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
-            color: white;
-            padding: 20px 24px;
-            border-radius: 14px;
-            margin-bottom: 12px;
-            text-align: center;
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
-            border: 3px solid #fbbf24;
+        /* 钩子区 */
+        .hook {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white; padding: 24px 20px; border-radius: 14px; margin-bottom: 12px;
+            text-align: center; box-shadow: 0 6px 20px rgba(30, 41, 59, 0.3); position: relative; overflow: hidden;
         }
-        .memory-hook-top .pudding { font-size: 48px; display: block; margin-bottom: 4px; line-height: 1; }
-        .memory-hook-top .big { font-size: 26px; font-weight: 800; display: block; margin-bottom: 4px; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        .memory-hook-top .sub { font-size: 13px; opacity: 0.95; font-weight: 500; }
+        .hook::before {
+            content: ''; position: absolute; top: -40px; right: -40px; width: 120px; height: 120px;
+            background: rgba(245, 158, 11, 0.15); border-radius: 50%;
+        }
+        .hook .question {
+            font-size: 22px; font-weight: 800; display: block; line-height: 1.3;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b, #d97706);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hook .promise {
+            font-size: 14px; display: block; margin-top: 8px; opacity: 0.85; line-height: 1.6;
+        }
+        .hook .promise em {
+            font-style: normal; color: #fbbf24; font-weight: 600;
+        }
+        .hook .memory-tag {
+            display: inline-block; margin-top: 10px; padding: 3px 12px; background: rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 20px; font-size: 11px; color: #fbbf24;
+        }
         .header {
             background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             color: white; padding: 16px 20px; border-radius: 10px; margin-bottom: 12px;
@@ -99,41 +106,62 @@
             display: inline-block; background: #10b981; color: white; font-size: 11px; font-weight: 700;
             padding: 2px 10px; border-radius: 10px; margin-left: 8px; vertical-align: middle;
         }
-    </style>
-    <style>
-        /* v6 答题区样式（v7 沿用） */
-        .answer-box { margin: 12px 0; padding: 12px; background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%); border-left: 3px solid #3b82f6; border-radius: 6px; }
-        .answer-box-title { font-size: 13px; font-weight: 600; color: #1e40af; margin-bottom: 6px; }
-        .answer-box textarea { width: 100%; padding: 8px 10px; border: 1px solid #93c5fd; border-radius: 4px; font-family: -apple-system, sans-serif; font-size: 13px; line-height: 1.5; resize: vertical; min-height: 120px; background: white; color: #1f2937; }
-        .answer-box textarea:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
-        .answer-actions { display: flex; gap: 8px; margin-top: 8px; align-items: center; flex-wrap: wrap; }
-        .btn-primary, .btn-secondary { padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; transition: all 0.15s; }
+        /* v8 分框答题区 */
+        .answer-grid {
+            margin: 12px 0 0 0;
+        }
+        .answer-field {
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.08); border-radius: 8px; padding: 10px; border: 1px solid rgba(255,255,255,0.15);
+        }
+        .answer-field-label {
+            font-size: 13px; font-weight: 600; color: #fcd34d; margin-bottom: 4px;
+            display: flex; align-items: center; gap: 4px;
+        }
+        .answer-field-hint {
+            font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 6px; font-weight: 400;
+        }
+        .answer-field textarea {
+            width: 100%; padding: 8px 10px; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px;
+            font-family: -apple-system, sans-serif; font-size: 13px; line-height: 1.5; resize: vertical;
+            min-height: 60px; background: rgba(255,255,255,0.95); color: #1f2937;
+        }
+        .answer-field textarea:focus {
+            outline: none; border-color: #fbbf24; box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.3);
+        }
+        .answer-actions {
+            display: flex; gap: 8px; margin-top: 10px; align-items: center; flex-wrap: wrap;
+        }
+        .btn-primary, .btn-secondary {
+            padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; transition: all 0.15s;
+        }
         .btn-primary { background: #3b82f6; color: white; }
         .btn-primary:hover { background: #2563eb; }
-        .btn-secondary { background: #e5e7eb; color: #374151; }
-        .btn-secondary:hover { background: #d1d5db; }
+        .btn-secondary { background: rgba(255,255,255,0.2); color: white; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.35); }
         .status-text { font-size: 11px; margin-left: 4px; font-weight: 500; }
-        .status-success { color: #059669; }
-        .status-warn { color: #d97706; }
-        .status-error { color: #dc2626; }
-        .status-pending { color: #2563eb; }
-        .token-config { margin-top: 10px; font-size: 12px; background: #fffbeb; padding: 6px 10px; border-radius: 4px; border-left: 3px solid #f59e0b; }
-        .token-config summary { cursor: pointer; font-weight: 500; color: #78350f; }
-        .token-config p { margin: 6px 0; color: #78350f; line-height: 1.5; }
-        .token-config input { width: 100%; padding: 6px 8px; margin: 4px 0; font-family: monospace; font-size: 12px; border: 1px solid #d97706; border-radius: 3px; background: white; }
+        .status-success { color: #86efac; }
+        .status-warn { color: #fde68a; }
+        .status-error { color: #fca5a5; }
+        .status-pending { color: #93c5fd; }
+        .token-config { margin-top: 10px; font-size: 12px; background: rgba(255,255,255,0.1); padding: 8px 10px; border-radius: 6px; }
+        .token-config summary { cursor: pointer; font-weight: 500; color: #fcd34d; }
+        .token-config p { margin: 6px 0; color: rgba(255,255,255,0.8); line-height: 1.5; font-size: 11px; }
+        .token-config a { color: #93c5fd; }
+        .token-config input { width: 100%; padding: 6px 8px; margin: 4px 0; font-family: monospace; font-size: 12px; border: 1px solid rgba(255,255,255,0.3); border-radius: 3px; background: rgba(255,255,255,0.95); }
     </style>
 </head>
 <body>
 
-<!-- 🍮 焦糖布丁记忆点 -->
-<div class="memory-hook-top">
-    <span class="pudding">🍮</span>
-    <span class="big">JTBD = 焦糖布丁</span>
-    <span class="sub">Bob Moesta 本人用的"焦糖布丁访谈"系列名 · 谐音梗记忆点</span>
+<!-- 🎣 v8 钩子：价值型 -->
+<div class="hook">
+    <span class="question">为什么更好的产品，反而卖得更差？</span>
+    <span class="promise">JTBD · 一套让你从「<em>猜</em>用户想要什么」<br>切换到「<em>看清</em>用户真实任务」的思维框架</span>
+    <span class="memory-tag">🍮 焦糖布丁 · JTBD 谐音梗记忆点</span>
 </div>
 
 <div class="header">
-    <span class="badge">📚 每日方法论小课堂 #001 · 10分钟版 <span class="upgrade-badge">⏫ 5→10分钟</span></span>
+    <span class="badge">📚 每日方法论小课堂 #001 · 10分钟版 <span class="upgrade-badge">v8</span></span>
     <h1>JTBD · 用户洞察的底层框架</h1>
     <h2>第 1 天（共 7 天打透）</h2>
 </div>
@@ -141,17 +169,12 @@
 <!-- ==================== 1.5 分钟·核心定义 ==================== -->
 <div class="section">
     <div class="section-title">🎯 1.5 分钟｜核心定义 <span class="time">1.5min</span></div>
-
-    <div class="essence">
-        JTBD = Jobs To Be Done = 用户要完成的任务
-    </div>
-
+    <div class="essence">JTBD = Jobs To Be Done = 用户要完成的任务</div>
     <div class="key-point"><strong>4 个字母不是独立的概念，是完整的句子结构</strong></div>
     <div class="key-point"><strong>J - Jobs（任务）</strong>：底层目标，不是"产品功能"<br>例：不是"过滤 0.0001 微米"，而是"让孩子喝到干净的水"</div>
     <div class="key-point"><strong>T - To（去完成）</strong>：动词，"雇用"这个动作<br>用户不是"买"产品，是"雇用"产品去完成任务</div>
     <div class="key-point"><strong>B - Be（处于情境）</strong>：状态/场景（何时/何地/何心情）</div>
     <div class="key-point"><strong>D - Done（完成的满足）</strong>：用户获得了什么心理/生理满足</div>
-
     <div class="essence" style="margin-top:10px;">
         一句话本质 = <strong>用户"雇用"产品完成 [某种情境下] 的 [某种任务]，从而 [获得满足]</strong>
     </div>
@@ -160,50 +183,38 @@
 <!-- ==================== 3 分钟·经典案例：麦当劳奶昔（3 段式完整版）==================== -->
 <div class="section">
     <div class="section-title">📖 3 分钟｜经典案例：麦当劳奶昔 <span class="time">3min</span></div>
-
-    <!-- 段1 · 背景还原 -->
     <div class="case-section">
         <span class="case-label bg">段 1 · 背景还原</span>
-        <p><strong>委托</strong>：1990 年代，麦当劳找到哈佛商学院教授克莱顿·克里斯坦森（Clayton Christensen）和 Bob Moesta 的团队，奶昔销量连续几个季度停滞，想</p>
+        <p><strong>委托</strong>：1990 年代，麦当劳找到哈佛商学院教授克莱顿·克里斯坦森和 Bob Moesta 团队，奶昔销量连续几个季度停滞。</p>
         <p><strong>第一直觉</strong>：团队立刻走标准流程——"按客户画像分群"（年龄/收入/家庭结构），做定量问卷问"奶昔太淡？太甜？太稀？太凉？"。根据问卷结果做了"<strong>更浓、更甜、更大杯、加果料</strong>"的改进。</p>
         <p><strong>数据异常</strong>：改进后销量<strong>不升反降</strong>。此时团队发现一个被忽略的数据——<strong>约 40% 的奶昔在早上 8 点前售出</strong>，下午几乎不动。早上买奶昔的人，只用现金、不下车、除了奶昔不买别的。</p>
         <p><strong>深访转折</strong>：团队停止问"怎么改善奶昔口味"，改问一个完全不同的问题——<strong>"你今天早上买奶昔，是为了完成什么任务？"</strong></p>
     </div>
-
-    <!-- 段2 · 方法论视角切入 -->
     <div class="case-section">
         <span class="case-label method">段 2 · 方法论视角切入</span>
         <p><strong>切换分析视角</strong>：从"谁买奶昔"（客户画像）切换到<strong>"用户在某场景下要完成什么任务"</strong>（Jobs 任务）。奶昔不是一个产品，而是三种不同 Job 的解决方案：</p>
-
         <div style="margin-top:8px; padding:8px 12px; background:#fffbeb; border-radius:6px; font-size:13px;">
-            <div class="case-line"><span class="label">🌅 早晨</span><span><strong>Job</strong>：在漫长通勤中有事做、不无聊、扛饿到中午、不弄脏车、单手能操作<br><strong>竞品</strong>：香蕉（太快吃完）、甜甜圈（粘手）、贝果（要抹酱太麻烦）、糖果（没营养且不扛饿）<br><strong>奶昔赢在</strong>：粘稠度高 → 慢慢吸 → 持续 20-30 分钟有事做</span></div>
-            <div class="case-line"><span class="label">☀️ 下午</span><span><strong>Job</strong>：妈妈带孩子——让孩子安静下来、不哭闹、不给糖果（怕甜怕蛀牙）、妈妈能说"我只给一点点"<br><strong>竞品</strong>：糖果（被拒绝）、薯条（太油）、玩具（孩子不买账）<br><strong>奶昔赢在</strong>：妈妈认同它是"特殊奖励"，孩子想要，可控</span></div>
-            <div class="case-line"><span class="label">🌙 晚上</span><span><strong>Job</strong>：爸爸下班——犒劳自己一天的辛苦、解馋、罪感低、不耽误给家人带礼物<br><strong>竞品</strong>：啤酒（开车不能喝）、零食（没仪式感）<br><strong>奶昔赢在</strong>：低罪感的 self-reward</span></div>
+            <div class="case-line"><span class="label">🌅 早晨</span><span><strong>Job</strong>：通勤中有事做、不无聊、扛饿到中午、不弄脏车、单手操作<br><strong>竞品</strong>：香蕉（太快吃完）、甜甜圈（粘手）、贝果（要抹酱）、糖果（不扛饿）<br><strong>奶昔赢在</strong>：粘稠度高 → 慢慢吸 → 持续 20-30 分钟有事做</span></div>
+            <div class="case-line"><span class="label">☀️ 下午</span><span><strong>Job</strong>：妈妈带孩子——让孩子安静、不给糖果（怕蛀牙）、妈妈能说"我只给一点点"<br><strong>竞品</strong>：糖果（被拒绝）、薯条（太油）、玩具（不买账）<br><strong>奶昔赢在</strong>：妈妈认同"特殊奖励"，孩子想要，可控</span></div>
+            <div class="case-line"><span class="label">🌙 晚上</span><span><strong>Job</strong>：爸爸下班——犒劳自己、解馋、罪感低、不耽误给家人带礼物<br><strong>竞品</strong>：啤酒（开车不喝）、零食（没仪式感）<br><strong>奶昔赢在</strong>：低罪感的 self-reward</span></div>
         </div>
-
-        <p style="margin-top:8px; font-size:13px;"><strong>核心洞察</strong>：三个时段用户是完全不同的<strong>人</strong>（即便同一个人早晨下班和晚上下班，需求也完全不一样），他们"雇用"奶昔的 Job 也完全不同。用一个产品打所有场景 = 三个 Job 都打不中。</p>
+        <p style="margin-top:8px; font-size:13px;"><strong>核心洞察</strong>：三个时段用户是完全不同的人（即便同一个人早晚需求也完全不一样），用一个产品打所有场景 = 三个 Job 都打不中。</p>
     </div>
-
-    <!-- 段3 · 方法论抽离 -->
     <div class="case-section">
         <span class="case-label result">段 3 · 方法论抽离</span>
         <p><strong>改进动作</strong>：不是"一个奶昔变好"，而是<strong>按三个 Job 做三段差异化产品</strong>——早晨版更粘稠扛饿、下午版迷你杯配玩具区、晚上版低糖但奶油感强解馋。</p>
         <p><strong>结果</strong>：单店奶昔销量<strong>翻倍</strong>，且三个版本各自站稳各自场景。</p>
-
-        <div class="essence" style="margin-top:10px;">
-            💡 <strong>4 条可迁移的 JTBD 思维</strong>
-        </div>
-        <div class="key-point" style="border-left-color:#22c55e; background:#f0fdf4;">1️⃣ <strong>市场切分单位改变</strong>：从"客户画像"切到"Jobs 任务"。同一客户在不同场景有不同的 Job。</div>
-        <div class="key-point" style="border-left-color:#22c55e; background:#f0fdf4;">2️⃣ <strong>竞品定义改变</strong>：奶昔的竞品不只是其他品牌奶昔，还包括香蕉、甜甜圈、贝果、糖果——任何能完成同一 Job 的东西。</div>
+        <div class="essence" style="margin-top:10px;">💡 <strong>4 条可迁移的 JTBD 思维</strong></div>
+        <div class="key-point" style="border-left-color:#22c55e; background:#f0fdf4;">1️⃣ <strong>市场切分单位改变</strong>：从"客户画像"切到"Jobs 任务"。同一客户在不同场景有不同 Job。</div>
+        <div class="key-point" style="border-left-color:#22c55e; background:#f0fdf4;">2️⃣ <strong>竞品定义改变</strong>：奶昔的竞品不只是其他奶昔，还包括香蕉、甜甜圈、贝果、糖果——任何能完成同一 Job 的东西。</div>
         <div class="key-point" style="border-left-color:#22c55e; background:#f0fdf4;">3️⃣ <strong>访谈问题改变</strong>：不问"你想要什么产品"，问"你今天要完成什么任务？为什么选这个？上次用的什么？哪里不满意？"</div>
-        <div class="key-point" style="border-left-color:#22c55e; background:#f0fdf4;">4️⃣ <strong>改进方向改变</strong>：不是"让产品更好"，而是"让产品更好地完成这个特定 Job"。早晨奶昔改进方向不是"更好喝"，而是"更扛饿+更久不化+单手更方便"。</div>
+        <div class="key-point" style="border-left-color:#22c55e; background:#f0fdf4;">4️⃣ <strong>改进方向改变</strong>：不是"让产品更好"，而是"让产品更好地完成这个特定 Job"。</div>
     </div>
 </div>
 
 <!-- ==================== 1.5 分钟·核心应用 ==================== -->
 <div class="section">
     <div class="section-title">🛠️ 1.5 分钟｜核心应用 <span class="time">1.5min</span></div>
-
     <div class="key-point"><strong>任何复杂产品</strong>都可以用 JTBD 重新框架化问题</div>
     <div class="key-point">✅ <strong>切市场</strong>：从"客户画像"切到"Jobs 任务"</div>
     <div class="key-point">✅ <strong>改产品</strong>：不是"让产品更好"，而是"让产品<strong>更好地完成某个 Job</strong>"</div>
@@ -214,212 +225,85 @@
 <div class="quiz">
     <h2>📝 1 道思考题 <span class="time">4min</span> <span class="ratio-tag">100% 经典案例</span></h2>
 
-    <!-- 晨曦咖啡 30 店实战案例背景 -->
     <div class="case-background">
         <strong style="font-size:15px;">☕ 实战委托：晨曦咖啡 · 30 店增长困境</strong>
-
         <div class="emoji-bullet"><span>📋</span><span>晨曦咖啡是一个区域性连锁品牌（30 家门店，分布在上海/苏州），主打精品手冲咖啡+舒适第三空间。开业 3 年，品牌口碑不错，但<strong>单店营收连续三个季度增长乏力</strong>。创始团队找到你做 JTBD 分析，希望找到增长突破口。</span></div>
-
         <div class="emoji-bullet"><span>🤔</span><span><strong>第一直觉</strong>：团队认为"下午时段是最大的增长机会"——上午卖得好，下午没人来，说明下午没有好的产品/活动。于是<strong>推出"下午茶套餐"</strong>（咖啡+甜点 35 元），在下午 2-5 点投放小红书+美团。</span></div>
-
         <div class="emoji-bullet"><span>📊</span><span><strong>数据异常</strong>：活动跑了一个月，下午客流确实涨了 15%，但<strong>客单价急剧下降</strong>（从人均 38 元跌到 24 元），而且<strong>复购率极低</strong>（下午新客次月回访率不到 8%，对比上午熟客回访率 72%）。更诡异的是——<strong>上午销量最好的美式，下午几乎卖不动</strong>；下午卖得最多的是拿铁和焦糖玛奇朵。</span></div>
-
         <div class="emoji-bullet"><span>🔍</span><span><strong>关键矛盾</strong>：下午客流涨了但赚不到钱，且用户来了就走（不逗留），完全不是团队期望的"第三空间社交场景"。团队困惑：<strong>到底是产品问题、定价问题、还是根本没搞清下午顾客的真实 Job？</strong></span></div>
     </div>
 
     <div class="highlight-box" style="margin-top:10px;">
         <strong>🎯 你的任务（用 JTBD 框架分析）</strong>
     </div>
-
     <ol>
-        <li><strong>识别两个时段的 Job</strong>：用 J/T/B/D 四字母框架，分别拆解晨曦咖啡"早晨顾客"和"下午顾客"被雇用的 Job 是什么？<strong>注意：不止是"喝咖啡"，参考奶昔案例——早晨奶昔的 Job 是"通勤不无聊+扛饿"，不是"喝饮料"。</strong></li>
-        <li><strong>分析核心差异</strong>：为什么上午美式卖爆、下午卖不动？这个差异说明了两个时段用户要完成的 Job 有什么本质不同？</li>
-        <li><strong>给出具体启示</strong>：基于 Job 差异，对晨曦咖啡的<strong>产品/服务/营销</strong>分别提出一个具体的改进方向（参考奶昔案例：不是"一个奶昔变好"，而是"按 Job 做三段差异化"）。</li>
+        <li><strong>识别两个时段的 Job</strong>：用 J/T/B/D 四字母框架拆解"早晨顾客"和"下午顾客"的 Job</li>
+        <li><strong>分析核心差异</strong>：为什么上午美式卖爆、下午卖不动？两个 Job 的本质不同是什么？</li>
+        <li><strong>给出具体启示</strong>：基于 Job 差异，对产品/服务/营销提出改进方向（参考奶昔：不是"一个产品变好"）</li>
     </ol>
 
-    <ul>
-        <li>❌ 不要说"下午人少多做活动"这种<strong>没有 JTBD 视角</strong>的回答</li>
-        <li>❌ 不要说"美式太苦下午没人想喝"这种<strong>功能层面的表象</strong></li>
-        <li>✅ 参考奶昔 3 段式思路：<strong>谁、何时、为何雇用、竞品是什么、完成的满足是什么</strong></li>
-        <li>✅ 关键提示：早起通勤 vs 午后休闲 → 同一杯咖啡是<strong>完全不同的 Job</strong></li>
-    </ul>
-
-    <div class="highlight-box" style="margin-top:8px;">
+    <div class="highlight-box">
         ⏰ <strong>10 分钟全过程</strong>：读定义 1.5min → 读奶昔案例 3min → 看核心应用 1.5min → 答题 4min<br>
-        📊 <strong>考察能力</strong>：JTBD 显式调用 + Jobs 按情境切分（时段+场景+竞品）+ 区分功能 vs 任务<br>
+        📊 <strong>考察能力</strong>：JTBD 显式调用 + Jobs 按情境切分 + 区分功能 vs 任务<br>
         🔗 <strong>下一节</strong>：Day02 · 4 步流程（识别→切片→找痛点→设计）
     </div>
 
-    <!-- ==================== v7 答题输入区 ==================== -->
-    <div class="answer-box">
-        <div class="answer-box-title">✍️ 在这里写你的答案（不必退出页面，10分钟版有4分钟答题时间）</div>
-        <textarea id="answer-day01" placeholder="早晨 Jobs（J/T/B/D）: &#10;...&#10;&#10;下午 Jobs（J/T/B/D）: &#10;...&#10;&#10;核心差异分析：&#10;...&#10;&#10;产品/服务/营销启示：&#10;..."></textarea>
-        <div class="answer-actions">
-            <button id="submit-day01" class="btn-primary">💾 保存到本地 + 同步 Gist</button>
-            <button id="copy-day01" class="btn-secondary">📋 复制到聊天</button>
-            <span id="status-day01" class="status-text"></span>
+    <!-- ==================== v8 分框答题区 ==================== -->
+    <div class="answer-grid">
+        <!-- 框 1：早晨 Job -->
+        <div class="answer-field">
+            <div class="answer-field-label">☕ 框 1 · 早晨顾客的 Job（J/T/B/D 框架）</div>
+            <div class="answer-field-hint">提示：通勤路上·独自·赶时间·需要清醒 → 他们"雇用"咖啡完成什么任务？挖到底层目标，不要写"提神"这种功能描述。</div>
+            <textarea id="answer-day01-1" placeholder="J（Job 任务）：早晨顾客雇用咖啡完成的底层目标是……&#10;T（Trigger 触发）：什么情境触发？&#10;B（Barrier 阻碍）：当前痛点是什么？为什么其他方案不行？&#10;D（Desired outcome 期望）：完成的标志/满足感是什么？"></textarea>
         </div>
-        <details class="token-config">
-            <summary>⚙️ GitHub Token 配置（首次使用 Gist 同步需要）</summary>
-            <p>
-                1. 去 <a href="https://github.com/settings/personal-access-tokens" target="_blank">GitHub Settings → Personal access tokens → Fine-grained tokens</a> 创建 token<br>
-                2. 勾选 <strong>Only select repositories</strong> → 选 <code>kkwbkk/jtbd-cards</code><br>
-                3. 权限只勾 <strong>Gists: Read and write</strong>，其他全部不勾<br>
-                4. 复制 token 粘贴到下面（<strong>只存本地，不上传</strong>）
-            </p>
-            <input type="password" id="token-day01" placeholder="github...xxxx">
-            <button id="save-token-day01" class="btn-secondary" style="margin-top:4px;">保存 Token</button>
-        </details>
+
+        <!-- 框 2：下午 Job -->
+        <div class="answer-field">
+            <div class="answer-field-label">🌤 框 2 · 下午顾客的 Job（J/T/B/D 框架）</div>
+            <div class="answer-field-hint">提示：午后·可能有人陪·不赶时间 → 数据说拿铁/焦糖玛奇朵卖爆、美式卖不动。他们"雇用"咖啡完成的是什么不同的任务？</div>
+            <textarea id="answer-day01-2" placeholder="J（Job 任务）：下午顾客雇用咖啡完成的底层目标是……&#10;T（Trigger 触发）：什么情境触发？&#10;B（Barrier 阻碍）：当前痛点是什么？&#10;D（Desired outcome 期望）：完成的标志/满足感是什么？"></textarea>
+        </div>
+
+        <!-- 框 3：核心差异 -->
+        <div class="answer-field">
+            <div class="answer-field-label">⚡ 框 3 · 核心差异分析</div>
+            <div class="answer-field-hint">提示：不是口味问题！参考奶昔案例——早晨奶昔竞品是香蕉/甜甜圈，下午奶昔竞品完全不同。两个 Job 的竞品、满足感、决策逻辑有什么本质不同？</div>
+            <textarea id="answer-day01-3" placeholder="早晨 Job vs 下午 Job 的本质差异：&#10;1. 竞品不同：早晨 vs ____；下午 vs ____&#10;2. 决策逻辑不同：早晨是 ____；下午是 ____&#10;3. 满足感不同：早晨获得 ____；下午获得 ____"></textarea>
+        </div>
+
+        <!-- 框 4：具体启示 -->
+        <div class="answer-field">
+            <div class="answer-field-label">🎯 框 4 · 给晨曦咖啡的产品/服务/营销启示</div>
+            <div class="answer-field-hint">提示：参考奶昔——不是"让奶昔更好喝"，而是"按三个 Job 做三段差异化产品"。给晨曦咖啡分别提一个产品改进、一个服务改进、一个营销策略。</div>
+            <textarea id="answer-day01-4" placeholder="产品启示：……&#10;&#10;服务启示：……&#10;&#10;营销启示：……"></textarea>
+        </div>
     </div>
 
-    <script>
-    (function() {
-        const DAY_KEY = 'day01';
-        const VERSION = 'v7';
-        const ANSWER_KEY = `jtbd_${DAY_KEY}_${VERSION}_answer`;
-        const TOKEN_KEY = 'jtbd_gist_token';
-        const REPO = 'kkwbkk/jtbd-cards';
+    <div class="answer-actions">
+        <button id="submit-day01" class="btn-primary">💾 保存到本地 + 同步 Gist</button>
+        <button id="copy-day01" class="btn-secondary">📋 复制到聊天</button>
+        <span id="status-day01" class="status-text"></span>
+    </div>
 
-        const $answer = document.getElementById('answer-day01');
-        const $submit = document.getElementById('submit-day01');
-        const $copy = document.getElementById('copy-day01');
-        const $status = document.getElementById('status-day01');
-        const $token = document.getElementById('token-day01');
-        const $saveToken = document.getElementById('save-token-day01');
-
-        function setStatus(msg, type) {
-            $status.textContent = msg;
-            $status.className = `status-text status-${type}`;
-        }
-
-        // 恢复已保存答案（v7 专属 key，不覆盖 v6 答案）
-        const savedAnswer = localStorage.getItem(ANSWER_KEY);
-        if (savedAnswer) {
-            $answer.value = savedAnswer;
-        }
-
-        // 恢复已保存 token
-        const savedToken = localStorage.getItem(TOKEN_KEY);
-        if (savedToken) {
-            $token.value = '已保存（' + savedToken.slice(-4) + '）';
-            $token.disabled = true;
-            $saveToken.textContent = '🔄 重新配置';
-        }
-
-        // 保存按钮：localStorage + Gist
-        $submit.addEventListener('click', async () => {
-            const answer = $answer.value.trim();
-            if (!answer) {
-                setStatus('⚠️ 请先写答案', 'warn');
-                $answer.focus();
-                return;
-            }
-
-            // 1. localStorage
-            try {
-                localStorage.setItem(ANSWER_KEY, answer);
-            } catch (e) {
-                setStatus('❌ 本地保存失败：' + e.message, 'error');
-                return;
-            }
-
-            // 2. Gist 同步
-            const token = localStorage.getItem(TOKEN_KEY);
-            if (!token) {
-                setStatus('✅ 已保存本地（未配 token，未同步 Gist）', 'warn');
-                return;
-            }
-
-            setStatus('🔄 同步 Gist 中...', 'pending');
-            const today = new Date().toISOString().split('T')[0];
-            const filename = `day01_v7_${today}.md`;
-            const content = `# JTBD Day01 v7 答案\\n\\n${answer}\\n\\n---\\n提交时间: ${new Date().toLocaleString('zh-CN')}\\n卡片版本: ${VERSION}\\n`;
-            try {
-                const listResp = await fetch(`https://api.github.com/gists?per_page=100&since=${today}T00:00:00Z`, {
-                    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
-                });
-                if (!listResp.ok) throw new Error(`list: HTTP ${listResp.status}`);
-                const gists = await listResp.json();
-                const existing = gists.find(g => g.files && g.files[filename]);
-
-                let resp;
-                if (existing) {
-                    resp = await fetch(`https://api.github.com/gists/${existing.id}`, {
-                        method: 'PATCH',
-                        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ files: { [filename]: { content } } })
-                    });
-                } else {
-                    resp = await fetch('https://api.github.com/gists', {
-                        method: 'POST',
-                        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            description: `JTBD Day01 v7 答案 - ${today}`,
-                            public: false,
-                            files: { [filename]: { content } }
-                        })
-                    });
-                }
-                if (!resp.ok) {
-                    const errText = await resp.text();
-                    throw new Error(`HTTP ${resp.status}: ${errText.slice(0, 100)}`);
-                }
-                const data = await resp.json();
-                setStatus(`✅ 已同步 Gist`, 'success');
-            } catch (e) {
-                setStatus('❌ Gist 失败：' + e.message.slice(0, 60), 'error');
-            }
-        });
-
-        // 复制按钮
-        $copy.addEventListener('click', async () => {
-            const answer = $answer.value.trim();
-            if (!answer) {
-                setStatus('⚠️ 请先写答案', 'warn');
-                $answer.focus();
-                return;
-            }
-            const text = `【Day01 v7 答案】\\n${answer}\\n\\n（提交时间：${new Date().toLocaleString('zh-CN')}）`;
-            try {
-                await navigator.clipboard.writeText(text);
-                setStatus('📋 已复制，去聊天粘贴给小马', 'success');
-            } catch (e) {
-                setStatus('❌ 复制失败：' + e.message, 'error');
-            }
-        });
-
-        // Token 保存
-        $saveToken.addEventListener('click', () => {
-            if ($token.disabled) {
-                $token.disabled = false;
-                $token.value = '';
-                $token.placeholder = 'github...xxxx';
-                $saveToken.textContent = '保存 Token';
-                return;
-            }
-            const token = $token.value.trim();
-            if (!token || !token.startsWith('github_')) {
-                setStatus('⚠️ token 格式不对（应以 github_ 开头）', 'warn');
-                return;
-            }
-            localStorage.setItem(TOKEN_KEY, token);
-            $token.value = '已保存（' + token.slice(-4) + '）';
-            $token.disabled = true;
-            $saveToken.textContent = '🔄 重新配置';
-            setStatus('✅ Token 已保存（仅本地）', 'success');
-        });
-    })();
-    </script>
+    <details class="token-config">
+        <summary>⚙️ GitHub Token 配置（首次使用 Gist 同步需要）</summary>
+        <p>
+            1. 去 <a href="https://github.com/settings/personal-access-tokens" target="_blank">GitHub Settings → Personal access tokens → Fine-grained tokens</a> 创建 token<br>
+            2. 勾选 <strong>Only select repositories</strong> → 选 <code>kkwbkk/jtbd-cards</code><br>
+            3. 权限只勾 <strong>Gists: Read and write</strong>，其他全部不勾<br>
+            4. 复制 token 粘贴到下面（<strong>只存本地，不上传</strong>）
+        </p>
+        <input type="password" id="token-day01" placeholder="github...xxxx">
+        <button id="save-token-day01" class="btn-secondary" style="margin-top:4px; background: rgba(255,255,255,0.15); color: white;">保存 Token</button>
+    </details>
 </div>
 
 <!-- ==================== 反馈资源（4 个）==================== -->
 <div class="section">
     <div class="section-title">📚 反馈资源（4 个 · 按你的时间选看 1-2 个）<span class="time">1min</span></div>
-
     <div class="highlight-box" style="background:#fef3c7; border-left:3px solid #f59e0b; color:#78350f; padding:6px 10px; margin:6px 0; border-radius:4px; font-size:11px;">
         💡 <strong>选看建议</strong>：时间紧只看 1 个视频（5分钟）；时间充裕看视频+翻书。
     </div>
-
     <a href="https://www.bilibili.com/video/BV1X2P7euE3Q/" target="_blank" class="resource">
         <span class="resource-icon">🎬</span>
         <div style="flex:1;">
@@ -427,7 +311,6 @@
             <div class="resource-meta">侯哥说产品 · 2025-02-27 · 5分钟讲清核心框架 · <strong>时间紧首选</strong></div>
         </div>
     </a>
-
     <a href="https://www.bilibili.com/video/BV1uXsVeGE3A/" target="_blank" class="resource">
         <span class="resource-icon">🎬</span>
         <div style="flex:1;">
@@ -435,7 +318,6 @@
             <div class="resource-meta">竟然爱上草莓了 · 2024-08-29 · Bob Moesta 本人访谈系列 · <strong>案例实操向</strong></div>
         </div>
     </a>
-
     <a href="https://www.bilibili.com/video/BV1kbPrzEEv3/" target="_blank" class="resource">
         <span class="resource-icon">🎬</span>
         <div style="flex:1;">
@@ -443,7 +325,6 @@
             <div class="resource-meta">探潮实验室 · 2026-03-05 · 中文字幕 · 标签含"焦糖布丁" · <strong>产品设计视角</strong></div>
         </div>
     </a>
-
     <a href="https://weread.qq.com/web/reader/c8532ab071543c07c85a3f2" target="_blank" class="resource">
         <span class="resource-icon">📘</span>
         <div style="flex:1;">
@@ -455,17 +336,179 @@
 
 <!-- ==================== 底部 ==================== -->
 <div class="footer">
-    <div class="day-info">📍 Week 1 · Day 1 · JTBD 焦糖布丁 · 10 分钟版（v7）</div>
+    <div class="day-info">📍 Week 1 · Day 1 · JTBD · 10 分钟版（v8）</div>
     <p style="margin-top:4px;">
-        <strong>v7 更新</strong>：① 奶昔案例从 5 行梗概升级为 3 段式完整版（背景还原 → 方法论视角 → 方法论抽离）<br>
-        ② 思考题从抽象对比升级为晨曦咖啡 30 店实战案例（含数据异常+第一直觉错+关键矛盾）<br>
-        ③ 学习时间从 5 分钟升级到 10 分钟（保证质量不牺牲深度）<br>
-        <strong>Day07 计划</strong>：JTBD 完整复盘版（4 步流程 + 3 个核心工具 + 实操模板）
+        <strong>v8 更新</strong>：① 钩子从谐音梗起源 → 价值型钩子（"更好的产品为什么卖得更差"）<br>
+        ② 答题框从 1 个 textarea → 4 个分框（早晨/下午/差异/启示，提示固定可见）<br>
+        <strong>学习路径</strong>：读定义 1.5min → 读案例 3min → 看应用 1.5min → 答题 4min<br>
+        <strong>Day07 计划</strong>：JTBD 完整复盘版
     </p>
     <p style="margin-top:4px; font-size:10px; color:#d1d5db;">
-        出题：2026-06-22 v7 实战升级版 · 谐音梗：焦糖布丁 · 4 个资源 · v6 答案保留在 localStorage（独立 key v7）
+        出题：2026-06-23 v8 · v6/v7 答案保留在 localStorage（独立 key v8）· 4 个分框各自独立保存
     </p>
 </div>
+
+<script>
+(function() {
+    const VERSION = 'v8';
+    const FIELD_KEYS = ['1', '2', '3', '4'];
+    const FIELD_LABELS = [
+        '☕ 早晨顾客的 Job（J/T/B/D）',
+        '🌤 下午顾客的 Job（J/T/B/D）',
+        '⚡ 核心差异分析',
+        '🎯 给晨曦咖啡的启示'
+    ];
+    const TOKEN_KEY = '***';
+    const REPO = 'kkwbkk/jtbd-cards';
+
+    const $fields = FIELD_KEYS.map(k => document.getElementById('answer-day01-' + k));
+    const $submit = document.getElementById('submit-day01');
+    const $copy = document.getElementById('copy-day01');
+    const $status = document.getElementById('status-day01');
+    const $token = document.getElementById('token-day01');
+    const $saveToken = document.getElementById('save-token-day01');
+
+    function answerKey(fieldIdx) { return 'jtbd_day01_' + VERSION + '_answer_' + FIELD_KEYS[fieldIdx]; }
+
+    function setStatus(msg, type) {
+        $status.textContent = msg;
+        $status.className = 'status-text status-' + type;
+    }
+
+    // 恢复已保存答案（v8 专属 key，每框独立）
+    FIELD_KEYS.forEach((k, i) => {
+        const saved = localStorage.getItem(answerKey(i));
+        if (saved) { $fields[i].value = saved; }
+    });
+
+    // 恢复 token
+    const savedToken = localStorage.getItem(TOKEN_KEY);
+    if (savedToken) {
+        $token.value = '已保存（' + savedToken.slice(-4) + '）';
+        $token.disabled = true;
+        $saveToken.textContent = '🔄 重新配置';
+    }
+
+    function combineAnswers() {
+        const parts = [];
+        FIELD_KEYS.forEach((_, i) => {
+            const val = $fields[i].value.trim();
+            if (val) { parts.push(FIELD_LABELS[i] + '\n' + val); }
+        });
+        return parts.join('\n\n---\n\n');
+    }
+
+    // 保存按钮
+    $submit.addEventListener('click', async () => {
+        let anyFilled = false;
+        FIELD_KEYS.forEach((_, i) => {
+            const val = $fields[i].value.trim();
+            if (val) { anyFilled = true; }
+        });
+        if (!anyFilled) {
+            setStatus('⚠️ 请至少填一个框', 'warn');
+            return;
+        }
+
+        // 1. localStorage（每框独立）
+        let saveErr = null;
+        FIELD_KEYS.forEach((_, i) => {
+            try {
+                localStorage.setItem(answerKey(i), $fields[i].value);
+            } catch (e) {
+                saveErr = e.message;
+            }
+        });
+        if (saveErr) {
+            setStatus('❌ 本地保存失败：' + saveErr, 'error');
+            return;
+        }
+
+        // 2. Gist 同步（合并 4 框）
+        const token = localStorage.getItem(TOKEN_KEY);
+        if (!token) {
+            setStatus('✅ 已保存本地（未配 token，未同步 Gist）', 'warn');
+            return;
+        }
+
+        setStatus('🔄 同步 Gist 中...', 'pending');
+        const today = new Date().toISOString().split('T')[0];
+        const filename = 'day01_' + VERSION + '_' + today + '.md';
+        const content = '# JTBD Day01 ' + VERSION + ' 答案\n\n' + combineAnswers() + '\n\n---\n提交时间: ' + new Date().toLocaleString('zh-CN') + '\n卡片版本: ' + VERSION + '\n';
+        try {
+            const listResp = await fetch('https://api.github.com/gists?per_page=100&since=' + today + 'T00:00:00Z', {
+                headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' }
+            });
+            if (!listResp.ok) throw new Error('list: HTTP ' + listResp.status);
+            const gists = await listResp.json();
+            const existing = gists.find(g => g.files && g.files[filename]);
+
+            let resp;
+            if (existing) {
+                resp = await fetch('https://api.github.com/gists/' + existing.id, {
+                    method: 'PATCH',
+                    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ files: { [filename]: { content } } })
+                });
+            } else {
+                resp = await fetch('https://api.github.com/gists', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        description: 'JTBD Day01 ' + VERSION + ' 答案 - ' + today,
+                        public: false,
+                        files: { [filename]: { content } }
+                    })
+                });
+            }
+            if (!resp.ok) {
+                const errText = await resp.text();
+                throw new Error('HTTP ' + resp.status + ': ' + errText.slice(0, 100));
+            }
+            setStatus('✅ 已同步 Gist', 'success');
+        } catch (e) {
+            setStatus('❌ Gist 失败：' + e.message.slice(0, 60), 'error');
+        }
+    });
+
+    // 复制按钮
+    $copy.addEventListener('click', async () => {
+        const combined = combineAnswers();
+        if (!combined) {
+            setStatus('⚠️ 请至少填一个框', 'warn');
+            return;
+        }
+        const text = '【Day01 ' + VERSION + ' 答案】\n\n' + combined + '\n\n（提交时间：' + new Date().toLocaleString('zh-CN') + '）';
+        try {
+            await navigator.clipboard.writeText(text);
+            setStatus('📋 已复制，去聊天粘贴给小马', 'success');
+        } catch (e) {
+            setStatus('❌ 复制失败：' + e.message, 'error');
+        }
+    });
+
+    // Token 保存
+    $saveToken.addEventListener('click', () => {
+        if ($token.disabled) {
+            $token.disabled = false;
+            $token.value = '';
+            $token.placeholder = 'github...xxxx';
+            $saveToken.textContent = '保存 Token';
+            return;
+        }
+        const token = $token.value.trim();
+        if (!token || !token.startsWith('github_')) {
+            setStatus('⚠️ token 格式不对（应以 github_ 开头）', 'warn');
+            return;
+        }
+        localStorage.setItem(TOKEN_KEY, token);
+        $token.value = '已保存（' + token.slice(-4) + '）';
+        $token.disabled = true;
+        $saveToken.textContent = '🔄 重新配置';
+        setStatus('✅ Token 已保存（仅本地）', 'success');
+    });
+})();
+</script>
 
 </body>
 </html>
