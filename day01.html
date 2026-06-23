@@ -124,7 +124,7 @@
         .answer-field textarea {
             width: 100%; padding: 8px 10px; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px;
             font-family: -apple-system, sans-serif; font-size: 13px; line-height: 1.5; resize: vertical;
-            min-height: 60px; background: rgba(255,255,255,0.95); color: #1f2937;
+            min-height: 80px; background: rgba(255,255,255,0.95); color: #1f2937; overflow-y: hidden;
         }
         .answer-field textarea:focus {
             outline: none; border-color: #fbbf24; box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.3);
@@ -506,6 +506,17 @@
         $token.disabled = true;
         $saveToken.textContent = '🔄 重新配置';
         setStatus('✅ Token 已保存（仅本地）', 'success');
+    });
+
+    // v8.1: textarea 自动撑高
+    $fields.forEach(function(el) {
+        function autoResize() {
+            el.style.height = 'auto';
+            el.style.height = Math.max(80, el.scrollHeight) + 'px';
+        }
+        el.addEventListener('input', autoResize);
+        // 恢复已保存内容时也要撑一下
+        if (el.value) { setTimeout(autoResize, 0); }
     });
 })();
 </script>
